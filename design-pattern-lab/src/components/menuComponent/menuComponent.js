@@ -111,6 +111,7 @@ const menuComponent = {
     logout(){
       tokenStore.clear();
       permissionStore.clear();
+      
       location.reload()
     },
   },
