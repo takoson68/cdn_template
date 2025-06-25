@@ -30,7 +30,7 @@ export const initPage = async ({ container, api }) => {
       return {
         // langDD: lang.langData,
         indexPage: "home",
-        testBox: "這是 home 頁面的內容 test!!",
+        testBox: "這是 home 頁面的內容 test!! 確定能上傳了嗎～～～～",
       };
     },
     created() {
