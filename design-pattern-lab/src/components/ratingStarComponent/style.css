@@ -1,0 +1,24 @@
+.ratingStarComponent-template {
+  padding: 1rem;
+  background: #f2f2f2;
+  border: 1px dashed #999;
+}
+
+.rating-stars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: #ffc107;
+}

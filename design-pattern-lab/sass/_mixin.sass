@@ -1,0 +1,438 @@
+=prefixer($property, $value, $prefixes)
+  @each $prefix in $prefixes
+    @if $prefix == webkit
+      -webkit-#{$property}: $value
+    @else if $prefix == moz
+      -moz-#{$property}: $value
+    @else if $prefix == ms
+      -ms-#{$property}: $value
+    @else if $prefix == o
+      -o-#{$property}: $value
+    @else if $prefix == spec
+      #{$property}: $value
+    @else
+      @warn "Unrecognized prefix: #{$prefix}"
+      
+
+=box-sizing($box-sizing)
+  +prefixer(box-sizing, $box-sizing, spec webkit moz ms o)
+
+=border-radius($border-radius)
+  +prefixer(border-radius, $border-radius, spec webkit moz ms o )
+
+=box-shadow($shadow)
+  +prefixer(box-shadow, $shadow, spec webkit moz ms o)
+
+=transition($transition)
+  +prefixer(transition, $transition, spec webkit moz ms o)
+
+=animation($animation: ' ')
+  +prefixer(animation, $animation, spec webkit moz ms o)
+
+=opacity($value)
+  $IEValue: $value * 100
+
+  opacity: $value
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $IEValue + ")"
+  filter: alpha(opacity = $IEValue)
+
+=filter-gradient($from-color, $to-color, $vv)
+  // background-color: mix($from-color, $to-color) Fallback
+  // background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from-color), to($to-color))
+  background-image: -webkit-linear-gradient($vv+deg, $from-color, $to-color)
+  background-image: -moz-linear-gradient($vv+deg, $from-color, $to-color)
+  background-image: -ms-linear-gradient($vv+deg, $from-color, $to-color)
+  background-image: -o-linear-gradient($vv+deg, $from-color, $to-color)
+  background-image: linear-gradient($vv+deg, $from-color, $to-color)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from-color}', endColorstr='#{$to-color}',GradientType=0)
+
+=linearGradient($top, $bottom)
+  background: $top
+  background: -moz-linear-gradient(top,  $top 0%, $bottom 100%)
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom))
+  background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%)
+  background: -o-linear-gradient(top,  $top 0%,$bottom 100%)
+  background: -ms-linear-gradient(top,  $top 0%,$bottom 100%)
+  background: linear-gradient(to bottom,  $top 0%,$bottom 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$top}', endColorstr='#{$bottom}',GradientType=0 )
+
+
+
+=size($w, $h: $w)
+  width: $w
+  height: $h
+
+=pos($t: null, $r: null, $b: null, $l: null)
+  position: absolute
+  top: $t
+  right: $r
+  bottom: $b
+  left: $l
+
+=flexbox($a: space-around, $b: center, $c: center)
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: $a
+  align-items: $b
+  align-content: $c
+
+=center($row:center, $col:center)
+  display: -webkit-flex
+  display: flex
+  -webkit-align-items: $row
+  align-items: $row
+  -webkit-justify-content: $col
+  justify-content: $col
+
+=fadein($animation: ' ')
+  +prefixer(animation, fadein $animation, spec webkit moz ms o)
+  
+  @keyframes fadein
+    from
+      opacity: 0
+      pointer-events: none
+    to
+      opacity: 1
+      pointer-events: auto
+  // Firefox < 16
+  @-moz-keyframes fadein
+    from
+      opacity: 0
+      pointer-events: none
+    to
+      opacity: 1
+      pointer-events: auto
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadein
+    from
+      opacity: 0
+      pointer-events: none
+    to
+      opacity: 1
+      pointer-events: auto
+  // Internet Explorer
+  @-ms-keyframes fadein
+    from
+      opacity: 0
+      pointer-events: none
+    to
+      opacity: 1
+      pointer-events: auto
+  // Opera < 12.1
+  @-o-keyframes fadein
+    from
+      opacity: 0
+      pointer-events: none
+    to
+      opacity: 1
+      pointer-events: auto
+
+=fadeout($animation: ' ')
+  +prefixer(animation, fadeout $animation, spec webkit moz ms o)
+
+  @keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+  // Firefox < 16
+  @-moz-keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+  // Internet Explorer
+  @-ms-keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+  // Opera < 12.1
+  @-o-keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+
+=fadeinUp($animation: ' ')
+  +prefixer(animation, fadeinUp $animation, spec webkit moz ms o)
+
+  @keyframes fadeinUp
+    from
+      opacity: 0
+      transform: translate(0px, 200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Firefox < 16
+  @-moz-keyframes fadeinUp
+    from
+      opacity: 0
+      transform: translate(0px, 200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeinUp
+    from
+      opacity: 0
+      transform: translate(0px, 200px)
+
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+  // Internet Explorer
+  @-ms-keyframes fadeinUp
+    from
+      opacity: 0
+      transform: translate(0px, 200px)
+
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+  // Opera < 12.1
+  @-o-keyframes fadeinUp
+    from
+      opacity: 0
+      transform: translate(0px, 200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+=fadeinDown($animation: ' ')
+  +prefixer(animation, fadeinDown $animation, spec webkit moz ms o)
+
+  @keyframes fadeinDown
+    from
+      opacity: 0
+      transform: translate(0px, -200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Firefox < 16
+  @-moz-keyframes fadeinDown
+    from
+      opacity: 0
+      transform: translate(0px, -200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeinDown
+    from
+      opacity: 0
+      transform: translate(0px, -200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Internet Explorer
+  @-ms-keyframes fadeinDown
+    from
+      opacity: 0
+      transform: translate(0px, -200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Opera < 12.1
+  @-o-keyframes fadeinDown
+    from
+      opacity: 0
+      transform: translate(0px, -200px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+=fadeinLeft($animation: ' ')
+  +prefixer(animation, fadeinLeft $animation, spec webkit moz ms o)
+
+  @keyframes fadeinLeft
+    from
+      opacity: 0
+      transform: translate(-100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Firefox < 16
+  @-moz-keyframes fadeinLeft
+    from
+      opacity: 0
+      transform: translate(-100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeinLeft
+    from
+      opacity: 0
+      transform: translate(-100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Internet Explorer
+  @-ms-keyframes fadeinLeft
+    from
+      opacity: 0
+      transform: translate(-100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Opera < 12.1
+  @-o-keyframes fadeinLeft
+    from
+      opacity: 0
+      transform: translate(-100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+=fadeinRight($animation: ' ')
+  +prefixer(animation, fadeinRight $animation, spec webkit moz ms o)
+
+  @keyframes fadeinRight
+    from
+      opacity: 0
+      transform: translate(100%, 0px)
+    to
+      opacity: 1
+      transform: translate(0%, 0px)
+  // Firefox < 16
+  @-moz-keyframes fadeinRight
+    from
+      opacity: 0
+      transform: translate(100%, 0px)
+    to
+      opacity: 1
+      transform: translate(0%, 0px)
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeinRight
+    from
+      opacity: 0
+      transform: translate(100%, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Internet Explorer
+  @-ms-keyframes fadeinRight
+    from
+      opacity: 0
+      transform: translate(100%, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Opera < 12.1
+  @-o-keyframes fadeinRight
+    from
+      opacity: 0
+      transform: translate(100%, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+=fadeinRight_px($animation: ' ')
+  +prefixer(animation, fadeinRight_px $animation, spec webkit moz ms o)
+
+  @keyframes fadeinRight_px
+    from
+      opacity: 0
+      transform: translate(100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0%, 0px)
+  // Firefox < 16
+  @-moz-keyframes fadeinRight_px
+    from
+      opacity: 0
+      transform: translate(100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0%, 0px)
+  // Safari, Chrome and Opera > 12.1
+  @-webkit-keyframes fadeinRight_px
+    from
+      opacity: 0
+      transform: translate(100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Internet Explorer
+  @-ms-keyframes fadeinRight_px
+    from
+      opacity: 0
+      transform: translate(100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+  // Opera < 12.1
+  @-o-keyframes fadeinRight_px
+    from
+      opacity: 0
+      transform: translate(100px, 0px)
+    to
+      opacity: 1
+      transform: translate(0px, 0px)
+
+=btn-close($x, $y, $w, $h, $ml, $mt)
+  &:before
+    position: absolute
+    left: $x
+    top: $y
+    width: $w
+    height: $h
+    margin-left: $ml
+    margin-top: $mt
+    border-top-right-radius: 4px
+    border-bottom-right-radius: 4px
+    background-color: #d06060
+    border: solid 1px #d86d6d
+    content: "\f00d"
+    font-family: FontAwesome
+    text-align: center
+    color: #fff
+    line-height: 65px
+    font-size: 26px
+    font-style: normal
+    font-weight: normal
+    text-decoration: inherit
+
+  &:hover:before
+    background-color: #c24a4a
+    border: solid 1px #d06060
+
+
+
+=btn($bottom: gray, $top: white, $border: black, $highlight: blue, $lowlight: gray, $text: white)
+  border: 1px solid $border
+  color: $text
+  border-radius: 5px
+  box-shadow: inset 0 1px 0px $highlight, 0 2px 0px $lowlight
+  text-shadow: 0px -1px 0px rgba(100, 100, 100, 0.5)
+  background: $bottom
+  padding: .45rem 1.5rem
+
+  +background-image(linear-gradient($top, $bottom))
+
+// make a button from a single color
+=buttonStyle($base-color)
+  $gray-border-color: #ababab
+  $light-gray-text-color: #666
+  $text-color: white !important
+  $gray: if(saturation($base-color) < 10, true, false)
+  $gray-text-color: if(lightness($base-color) > 68, $light-gray-text-color, $text-color)
+  $text: if($gray, $gray-text-color, $text-color)
+  $bottom-color: desaturate(darken(adjust_hue($base-color, -7), 3%), 1%)
+  $border-color: desaturate(darken(adjust_hue($base-color, -13), 3%), 1%)
+  $border-color: if($gray, $gray-border-color, $border-color)
+  $highlight-color: lighten(desaturate($base-color, 5%), 15%)
+  $lowlight-color: hsl(hue($base-color) - 20, 38%, 90%)
+
+  +btn($bottom-color, $base-color, $border-color, $highlight-color, $lowlight-color, $text)

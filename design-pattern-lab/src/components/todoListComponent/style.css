@@ -1,0 +1,83 @@
+.todo-container {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.todo-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+ul.todo-list {
+  padding: 0;
+}
+
+ul.todo-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px dashed #ddd;
+  counter-increment: my-counter;
+  position: relative;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+ul.todo-list li::before {
+  content: "(" counter(my-counter) ")";
+}
+
+ul.todo-list li:hover {
+  background-color: #eeeeee;
+  padding-left: 1em;
+}
+
+ul.todo-list li button {
+  position: absolute;
+  right: .5em;
+  z-index: 1;
+  border-radius: 8px;
+  background-color: #f16e11;
+  border: solid 2px #ffc4c4;
+  color: #ffffff;
+}
+
+ul.todo-list li span {
+  cursor: pointer;
+  padding: .5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+ul.todo-list li span.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+ul.todo-list li span small {
+  position: absolute;
+  right: 3rem;
+  background-color: #28aa28;
+  border: solid 2px #72da72;
+  padding: .5em 1em;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: .6em;
+}
