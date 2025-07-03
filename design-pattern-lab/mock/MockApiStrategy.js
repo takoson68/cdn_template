@@ -32,7 +32,7 @@ request(url, options = {}) {
       } else {
         resolve({ code: 404, message: `Mock 路由未定義: ${url}` })
       }
-    }, 10)
+    }, 0)
   })
 }
 
