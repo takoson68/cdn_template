@@ -6,7 +6,7 @@ const languageStore = {
     langCode = langCode || this.language;
 
     try {
-      const res = await fetch(`/design-pattern-lab/lang/lang-${langCode}.txt`);
+      const res = await fetch(`/cdn_template/design-pattern-lab/lang/lang-${langCode}.txt`);
       const text = await res.text();
       const parsed = this.parseLangText(text);
 
