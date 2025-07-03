@@ -6,30 +6,30 @@ const todoStore = container.resolve('todoStore')
 const todoListComponent = {
   name: 'todoListComponent',
 
-  template: `
-    <div class="todo-container">
-      <h2>📋 待辦清單</h2>
-      <hr>
-      <input
-        v-model="newItem"
-        type="text"
-        placeholder="輸入新任務"
-        @keyup.enter="addItem"
-        class="todo-input"
-      />
+  // template: `
+  //   <div class="todo-container">
+  //     <h2>📋 待辦清單</h2>
+  //     <hr>
+  //     <input
+  //       v-model="newItem"
+  //       type="text"
+  //       placeholder="輸入新任務"
+  //       @keyup.enter="addItem"
+  //       class="todo-input"
+  //     />
 
-      <ul class="todo-list">
-        <li v-for="(item, index) in items" :key="index">
-          <span @click="toggleItem(index)">
-            {{ item.text }}<br>
-            <small>{{ item.createdAt }}</small>
-          </span>
-          <button @click="removeItem(index)">✕</button>
-        </li>
-      </ul>
-    </div>
-  `,
-
+  //     <ul class="todo-list">
+  //       <li v-for="(item, index) in items" :key="index">
+  //         <span @click="toggleItem(index)">
+  //           {{ item.text }}<br>
+  //           <small>{{ item.createdAt }}</small>
+  //         </span>
+  //         <button @click="removeItem(index)">✕</button>
+  //       </li>
+  //     </ul>
+  //   </div>
+  // `,
+  template: '#todoListComponent',
   data() {
     return {
       newItem: '',

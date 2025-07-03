@@ -1,0 +1,117 @@
+extends ./_system/_model.pug
+block append meta
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  meta(name="description", content="新增攻擊路線")
+block append title
+  title mtk2mad
+block append link
+  link(href="./css/mtk2png.css" rel="stylesheet" type="text/css")
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet")
+block varPage
+  -var page = 'mtk2mad'
+block body
+  .mtk2png.mtk2mad
+
+    section.sys_title 
+      h1 攻擊進程圖!!!!!!
+        a(href="./home.html") 回首頁
+      button.top_right.btn_dlo.center.btn( onClick="screenshot();")
+        span.material-icons cloud_download
+        b 下載圖片
+
+    section#mtkBox
+      .mdTopng
+        h1.actTitle 新增攻擊路線 
+          small ( 攻擊起點必須按照出現順序填寫 ) 
+            i ＊ 右邊圖片中箭頭線段及灰底方框皆可雙擊拖曳，且左方輸入資訊欄標註目標紅框  
+        small ( 沒有出現 + 就代表此攻擊對象主機重複，此路線不再延展，請由重複之主機路線發展 )
+          
+        //- p {{allPointBox}}
+        //- textarea(v-model="mdData")
+
+        .dataListMad 
+          listpapa( :md-data="mdData" :tree-box="treeBox" :all-point="allPointBox") 
+
+        .setInText(v-show="showText" ) 
+          select(v-model="setTextIndex" :class="setTextIndex==null&&'onNo'")
+            option( :value="null" disabled selected) 選取節點 
+            option( v-for="(item,j) in allPointBox" :key="j" :value="item[0]") {{item[0]}}
+          textarea(v-model="setText" placeholder="+ 主機名稱 // 主機ＩＰ // 攻擊單位行為 // 攻擊行為內容")
+          button.btn(@click="openShowText(1)") 送出
+          em.cloSetText(@click="openShowText(0)") X
+        .readerPic
+          //- button(@click="mdToJson()") 繪出圖片
+          //- button.flex_1(@click="openShowText(0)" ) 文字輸入
+          button.btn.flex_1(@click="downMan") 下載json 
+          //- button 使用json載入
+          label.btn(for="#fileIpnut") 
+            input( type="file" id="fileIpnut" @change="handleFileInput") 
+        .dragWidth(title="拖曳調整輸入框寬度")
+          span.material-icons.rr90 import_export
+      #printable 
+
+        #mtkInit
+          
+          ul.box#boxLi
+            li(v-for="(aa,i) in treeBox" :key="i") 
+              //- p {{treePointData}}
+              svg#svgBox(ref='svg' v-if="i===0")
+                //- 箭頭跟圓點
+                g( v-for="(dd,jj) in treePointData")
+                  marker( :id="'e_'+dd.nb" markerUnits="strokeWidth" markerWidth="5" markerHeight="4" refX="0" refY="2" orient="auto")
+                    path( d="M 0 0 L 5 2 L 0 4 z" :fill='dd.offset.color')
+                  marker( :id="'b_'+dd.nb" viewBox="-10 -10 70 70" refX="10" refY="10" markerWidth="15" markerHeight="15" orient="auto")
+                    circle( :fill='dd.offset.color' :stroke='dd.offset.color' stroke-width="4" cx="10" cy="10" r="10")
+                  
+                  g( v-if="dd.s!==dd.e" :transform="`translate(${dd.offset.x}, ${dd.offset.y})`")
+                    path.testPath(v-show="!!!dd.useLine||dd.useLine=='o_d'" :id="'path_'+jj" :d="renderArrow(dd,jj)" @click="pathSet(dd,jj)" , @mousedown="dragSvgBox(dd,'#path_'+jj,'offset')"
+                        :stroke='dd.offset.color' fill="none" :key="jj" :marker-start="'url(#b_'+dd.nb+')'" ,
+                        :marker-end="'url(#e_'+dd.nb+')'" stroke-width="5" :stroke-dasharray="strokeDasharray(dd.offset.strokeStyle)")
+                    
+                    g(v-show="dd.useLine=='n_d'")
+                      path.testPath( :id="'path_'+jj+'_n'" :d="dMaker(dd,jj)" @click="pathSet(dd,jj)" , @mousedown="dragSvgBox(dd,'#path_'+jj+'_n','offset')"
+                        :stroke='dd.offset.color' fill="none" :key="jj" :marker-start="'url(#b_'+dd.nb+')'" ,
+                        :marker-end="'url(#e_'+dd.nb+')'" stroke-width="5" :stroke-dasharray="strokeDasharray(dd.offset.strokeStyle)")
+
+                      circle(v-show="showPathSet" v-for="(pp,ii) in dd.lineTheme.p" :key="ii" fill='#e21e6c' stroke='#000000' stroke-width="4" :cx="pp[0]" :cy="pp[1]" r="18" @mousedown="dragLineBox(dd.lineTheme.p[ii],'.circle_'+dd.nb+ii,jj,ii)" :class="'circle_'+dd.nb+ii")
+
+                //- 這邊是畫文字跟底色
+                g( v-for="(dd,jj) in treePointData" v-if="dd.n!==''||dd.r!==''" :class="'g_'+dd.nb" @mousedown="dragSvgBox(dd,'.g_'+dd.nb,'textset')" @click="pathSet(dd,jj)")
+                  rect( :id="'rect_'+jj" x="0" y="0" :stroke="dd.offset.color" stroke-width="3" width="100" height="40" :fill="lightenColor(dd.offset.color)" rx="6" ry="6" :transform="`translate(${dd.textset.x},${dd.textset.y})`")
+                  text.dragText( :transform="`translate(${dd.textset.x},${dd.textset.y})`"  x=" ", y=" " text-anchor="middle" fill="#ffffff") 
+                    tspan( :id="'text_'+jj" x=" " y=" " font-size="16") {{dd.n}}
+                    tspan( :id="'text_'+jj+'_1'" x=" " y=" " font-size="13") {{dd.r}}
+                    
+
+
+              folders( :folder="aa" :nbm="i")
+
+              //- 因為svg直接載人入圖片不支援擷取畫面，所以改成html訂位方式
+              .textIcon( v-if="i===0" v-show="dd.textset.icon" :id="'text_'+jj+'_2'" v-for="(dd,jj) in treePointData"  :style="'border-color: '+dd.offset.color+'; background-color: '+dd.offset.color+';'+'transform: translate('+dd.textset.x+'px,'+dd.textset.y+'px);'" )
+                span.material-icons( ) {{dd.textset.icon}}
+                //- i {{dd.textset.icon}}
+
+            .typeList
+              b(v-for="(sd,jj) in useTypeState" :key="jj") 
+                span.material-icons {{sd[0]}}
+                i {{sd[1]}}
+
+
+        .scale 
+          ul 
+            li(v-for="(t,j) in scalMen" :key="j" :class="t===scalPick?'pickMen':''" @click="scaleBox(t)") {{t==1?'原尺寸':t+' 倍'}}
+
+
+
+      //- 線段樣式 ---------------------------
+      include ./_mtkTemp/_showPathSet.pug
+
+
+
+  //- 加載 template --------------------------- 
+  include ./_mtkTemp/_folder.pug
+  include ./_mtkTemp/_listpapa.pug
+
+  script(type="text/javascript" src="/vendors/html2canvas/html2canvas.min.js") 

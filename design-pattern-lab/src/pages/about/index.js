@@ -18,8 +18,8 @@ export const initPage = async ({ container, api }) => {
       <DefaultLayout :testBox="testBox">
         <template #conApp>
           <div class="conApp">
+            <mytestComponent />
             <ComponentTemplate />
-        
             <hr>
             <PaginationComponent :showset="true" :editable-fields="editableFields" :items="items" :columns="columns"/>
             <hr>

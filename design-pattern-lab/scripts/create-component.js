@@ -36,11 +36,7 @@ fs.writeFileSync(
 
 const ${folderName} = {
   name: '${folderName}',
-  template: \`
-    <div class="${folderName}-template">
-      <p>這是 ${folderName} 元件模板!!!!!。</p>
-    </div>
-  \`,
+  template: '#${folderName}',
   props: {},
   data() {
     return {}
@@ -77,6 +73,20 @@ path.join(componentDir, 'style.sass'),`
 
 `
 )
+
+// _index.pug
+fs.writeFileSync(
+  path.join(componentDir, '_index.pug'),
+`// _index.pug
+// 將下面這個放入，要引入的頁面
+//  include ../components/${folderName}/_index.pug
+script(id="${folderName}" type="text/x-template")
+  div( class="${folderName}-template")
+    h2 新增${folderName}元件 ~~~~
+
+`
+)
+
 
 // index.js
 fs.writeFileSync(

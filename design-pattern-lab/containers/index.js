@@ -12,6 +12,8 @@ import otherStore from './store/otherStore.js'
 import { PageDataBridge } from './utils/PageDataBridge.js'
 import todoStore from './store/todoStore.js'
 import testStore from './store/testStore.js'
+// 臨時倉庫
+import tempStore from './store/tempStore.js'
 
 import permissionStore from './store/permissionStore.js'
 import { hasPermission } from './utils/permissionUtils.js'
@@ -29,6 +31,8 @@ container.register('otherStore', otherStore);
 container.register('pageDataBridge', new PageDataBridge())
 container.register('todoStore', todoStore);
 container.register('testStore', testStore);
+// 臨時倉庫註冊
+container.register('tempStore', tempStore)
 
 container.register('permissionStore', permissionStore)
 container.register('hasPermission', hasPermission)

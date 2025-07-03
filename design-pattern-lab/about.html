@@ -18,6 +18,17 @@
       </footer>
     </div>
   </body>
+  <!-- _index.pug-->
+  <!-- 將下面這個放入，要引入的頁面-->
+  <!--  include ../components/mytestComponent/_index.pug-->
+  <script id="mytestComponent" type="text/x-template">
+    <div class="mytestComponent-template">
+      <h2>新增mytestComponent元件 ~~~~ </h2>
+      <p>這裡綁定 testStore 資料達到跨元件資料處理。</p>
+      <input v-model="myTest.name" placeholder="請輸入文字"/>
+      <button class="btn" @click="say">Submit</button>
+    </div>
+  </script>
   <script src="/vendors/mock/mock.min.js"> </script>
   <script type="importmap">
     {

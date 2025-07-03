@@ -5,6 +5,7 @@ const modules = await Promise.all([
   import('@/components/component-template/index.js'),
   import('@/components/listUseStarTemp/index.js'),
   import('@/components/ratingStarComponent/index.js'),
+  import('@/components/mytestComponent/index.js'),
 ])
 
 export default {

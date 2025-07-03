@@ -1,0 +1,11 @@
+script(id="todoListComponent" type="text/x-template")
+  .todo-container
+    h2 📋 待辦清單 ~~~
+    hr
+    input.todo-input(v-model="newItem", type="text", placeholder="輸入新任務", @keyup.enter="addItem")
+    ul.todo-list
+      li(v-for="(item, index) in items", :key="index")
+        span(@click="toggleItem(index)") {{ item.text }}
+          br
+          small {{ item.createdAt }}
+        button(@click="removeItem(index)") ✕

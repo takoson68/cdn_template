@@ -18,14 +18,12 @@ const menuComponent = {
   template: `
     <nav class="topMenu">
       <ul>
-        <li v-for="route in routes" :key="route.path">
+        <li v-for="route in routes" :key="route.path" :class="route.component.toLowerCase()===indexUrl?'pickLi':''">
           <a v-if="route.path !== ''" :href="route.path" :data-lang="route.meta.lang">
-            {{ langDD[route.meta.lang] }}
           </a>
           <a v-else :data-lang="route.meta.lang">
             {{ langDD[route.meta.lang] }}
           </a>
-
           <ul v-if="route.children && route.children.length > 0" :id="'i18n-'+route.component">
             <li v-for="child in route.children" :key="child.path || child.component">
               <a v-if="child.path !== ''" :href="child.path" :data-lang="child.meta.lang">
@@ -51,7 +49,6 @@ const menuComponent = {
       </div>
     </nav>
   `,
-
   data() {
     return {
       routes: menuStore.get()||[],
@@ -59,9 +56,9 @@ const menuComponent = {
       langDD: langStore.langData,
       language: langStore.getLanguage(),
       token: tokenStore.get()||'',
+      indexUrl: container.resolve("urlUtils").getPageName().toLowerCase(),
     };
   },
-
   created() {
     if (!this.routes.length) { //- 預設應該要給空陣列所以靠長度判斷
       api.get("/api/menu").then((res) => {

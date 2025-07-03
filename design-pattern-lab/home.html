@@ -18,24 +18,35 @@
       </footer>
     </div>
   </body>
-  <script src="/cdn_template/vendors/mock/mock.min.js"> </script>
+  <script id="todoListComponent" type="text/x-template">
+    <div class="todo-container">
+      <h2>📋 待辦清單 ~~~</h2>
+      <hr/>
+      <input class="todo-input" v-model="newItem" type="text" placeholder="輸入新任務" @keyup.enter="addItem"/>
+      <ul class="todo-list">
+        <li v-for="(item, index) in items" :key="index"><span @click="toggleItem(index)">{{ item.text }}<br/><small>{{ item.createdAt }}</small></span>
+          <button @click="removeItem(index)">✕</button>
+        </li>
+      </ul>
+    </div>
+  </script>
+  <script src="/vendors/mock/mock.min.js"> </script>
   <script type="importmap">
     {
       "imports": {
-        "@/containers/": "/cdn_template/design-pattern-lab/containers/",
-        "@/mock/": "/cdn_template/design-pattern-lab/mock/",
-        "@/lang/": "/cdn_template/design-pattern-lab/lang/",
-        "@/api/": "/cdn_template/design-pattern-lab/api/",
-        "@Vue": "/cdn_template/design-pattern-lab/VueContext.js",
-        "@/": "/cdn_template/design-pattern-lab/",
-        "@/src": "/cdn_template/design-pattern-lab/src/",
-        "@/utils/": "/cdn_template/design-pattern-lab/containers/utils/",
-        "@/framework/": "/cdn_template/design-pattern-lab/containers/framework/",
-        "@/pages/": "/cdn_template/design-pattern-lab/src/pages/",
-        "@/plugins/": "/cdn_template/design-pattern-lab/src/plugins/",
-        "@/layouts/": "/cdn_template/design-pattern-lab/src/layouts/",
-        "@/components/": "/cdn_template/design-pattern-lab/src/components/",
-        "@/vendors/": "/cdn_template/vendors/"
+        "@/containers/": "/design-pattern-lab/containers/",
+        "@/mock/": "/design-pattern-lab/mock/",
+        "@/api/": "/design-pattern-lab/api/",
+        "@Vue": "/design-pattern-lab/VueContext.js",
+        "@/": "/design-pattern-lab/",
+        "@/src": "/design-pattern-lab/src/",
+        "@/utils/": "/design-pattern-lab/containers/utils/",
+        "@/framework/": "/design-pattern-lab/containers/framework/",
+        "@/pages/": "/design-pattern-lab/src/pages/",
+        "@/plugins/": "/design-pattern-lab/src/plugins/",
+        "@/layouts/": "/design-pattern-lab/src/layouts/",
+        "@/components/": "/design-pattern-lab/src/components/",
+        "@/vendors/": "/vendors/"
       }
     }
     

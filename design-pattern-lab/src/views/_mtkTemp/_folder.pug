@@ -1,0 +1,37 @@
+script(type="text/x-template", id="folders-component")
+  template 
+    ul 
+      folder( :folder="folder" :nbm="0" :imgList="imgList" :typeStatus="typeStatus")
+
+
+script(type="text/x-template", id="folder-component")
+  template
+    li(:class="'flo_'+nbm" v-if="!folder.end")
+      .boxName(:class="folder.one&&'art'")
+        .imgBox( @click="pickFocus(folder.nb)" :id="'point_'+folder.e2", :style="'background-image: url(../images/'+folder.folder_img+'.jpeg)'")
+          .typeStatusBox
+            .typeStatus( v-if="folder.folder_type.length>0" v-for="(dd,ii) in folder.folder_type" :key="ii")
+              span.material-icons.material-icons-outlined {{dd}}
+          
+          .imgListBox
+            ul
+              b 主機種類
+              //- li(v-for="(dd,ii) in imgList", @click="setBg('point_'+folder.e2,dd)", :key="ii") {{ dd }}
+              li(v-for="(dd,ii) in imgList", :key="ii")
+                input(:value="dd" :id="'img_'+folder.e2+'_'+dd" v-model="folder.folder_img" type="radio") 
+                label( :for="'img_'+folder.e2+'_'+dd" ) {{dd}}
+            hr
+            ul
+              b 狀態標示 (多選)
+              //- li(v-for="(ss,ii) in typeStatus", @click="settype('point_'+folder.e2,ss[0])", :key="ii") {{ss[1]}}
+              li(v-for="(ss,ii) in typeStatus", :key="ii") 
+                input(:value="ss[0]" :id="'type_'+folder.e2+'_'+ss[0]" v-model="folder.folder_type" type="checkbox") 
+                label(:for="'type_'+folder.e2+'_'+ss[0]") {{ss[1]}}
+
+        b
+          em(:class="!folder.ip&&'noBrb'") {{ folder.e }}
+          small(v-if="!!folder.ip") {{ folder.ip }}
+
+      ul(v-if="folder.children && folder.children.length > 0") 
+        folder(v-for="(child,ii) in folder.children", :folder="child", :nbm="ii", :imgList="imgList", :typeStatus="typeStatus")
+

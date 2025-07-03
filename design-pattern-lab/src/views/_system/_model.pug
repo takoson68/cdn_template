@@ -41,25 +41,28 @@ html(xmlns="http://www.w3.org/1999/xhtml")
     
 
   
-
+  //- -var root = '/cdn_template' //- 如果網址前面還有跟目錄
+  -var root = ''
+  
   block scripts
-  script(src="/vendors/mock/mock.min.js") 
+  script(src=root+"/vendors/mock/mock.min.js") 
+
   script(type="importmap").
     {
       "imports": {
-        "@/containers/": "/design-pattern-lab/containers/",
-        "@/mock/": "/design-pattern-lab/mock/",
-        "@/api/": "/design-pattern-lab/api/",
-        "@Vue": "/design-pattern-lab/VueContext.js",
-        "@/": "/design-pattern-lab/",
-        "@/src": "/design-pattern-lab/src/",
-        "@/utils/": "/design-pattern-lab/containers/utils/",
-        "@/framework/": "/design-pattern-lab/containers/framework/",
-        "@/pages/": "/design-pattern-lab/src/pages/",
-        "@/plugins/": "/design-pattern-lab/src/plugins/",
-        "@/layouts/": "/design-pattern-lab/src/layouts/",
-        "@/components/": "/design-pattern-lab/src/components/",
-        "@/vendors/": "/vendors/"
+        "@/containers/": "#{root}/design-pattern-lab/containers/",
+        "@/mock/": "#{root}/design-pattern-lab/mock/",
+        "@/api/": "#{root}/design-pattern-lab/api/",
+        "@Vue": "#{root}/design-pattern-lab/VueContext.js",
+        "@/": "#{root}/design-pattern-lab/",
+        "@/src": "#{root}/design-pattern-lab/src/",
+        "@/utils/": "#{root}/design-pattern-lab/containers/utils/",
+        "@/framework/": "#{root}/design-pattern-lab/containers/framework/",
+        "@/pages/": "#{root}/design-pattern-lab/src/pages/",
+        "@/plugins/": "#{root}/design-pattern-lab/src/plugins/",
+        "@/layouts/": "#{root}/design-pattern-lab/src/layouts/",
+        "@/components/": "#{root}/design-pattern-lab/src/components/",
+        "@/vendors/": "#{root}/vendors/"
       }
     }
 

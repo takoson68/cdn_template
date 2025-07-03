@@ -18,7 +18,9 @@ __componentUtils.js  這一控制元件的函式原本放在容器中，
 而css裡面內容是空的話，就會忽略
 
 
+## 如果template要使用pug來寫，季得要_index.pug  include 引入views的對應頁面，
 
+include ../components/todoListComponent/_index.pug
 
 
 

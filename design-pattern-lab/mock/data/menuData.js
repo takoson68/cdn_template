@@ -20,7 +20,7 @@ const menu = [
     children: [
       {
         path: "/design-pattern-lab/about_team.html",
-        component: "AboutTeam",
+        component: "About",
         meta: {
           title: "團隊介紹",
           lang: "menu_lang_25",
@@ -29,7 +29,7 @@ const menu = [
       },
       {
         path: "/design-pattern-lab/about_mission.html",
-        component: "AboutMission",
+        component: "About",
         meta: {
           title: "我們的使命",
           lang: "menu_lang_26",
@@ -50,11 +50,20 @@ const menu = [
   },
   {
     path: "/design-pattern-lab/calendar.html",
-    component: "CalendarPage",
+    component: "calendar",
     meta: {
       title: "萬年曆",
       lang: "menu_lang_15",
       description: "查看萬年曆並選擇日期。",
+    },
+  },
+  {
+    path: "/design-pattern-lab/mtk2mad.html",
+    component: "mtk2mad",
+    meta: {
+      title: "攻擊路徑圖",
+      lang: "menu_lang_22",
+      description: "攻擊路徑圖繪製功能",
     },
   },
   {
