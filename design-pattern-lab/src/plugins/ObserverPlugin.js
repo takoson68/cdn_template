@@ -1,5 +1,5 @@
 import { api } from '@/api/index.js'
-import { container } from '@/containers/index.js' // 將 tokenStore 註冊在這裡
+import { container } from '@/containers/index-dist.js' // 將 tokenStore 註冊在這裡
 const menuStore = container.resolve('menuStore');
 export default {
   name: 'ObserverPlugin',

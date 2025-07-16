@@ -3,7 +3,7 @@
   這裡是放置臨時資料的store，因為不想讓store因為不必要的資料而一直成長下去，
   但又需要用到跨元件資料同步，所以產生這個臨時的store，
 */
-import { reactive, toRaw } from '@Vue'
+import { reactive, toRaw } from '../../VueContext.js'
 
 const state = reactive({})
 

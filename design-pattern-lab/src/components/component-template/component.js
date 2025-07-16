@@ -1,4 +1,4 @@
-import { container } from "@/containers/index.js";
+import { container } from "@/containers/index-dist.js";
 
 const tempStore = container.resolve('tempStore')
 

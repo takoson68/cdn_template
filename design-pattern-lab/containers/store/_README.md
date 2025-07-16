@@ -25,7 +25,7 @@ export default permissionStore
 // 設定臨時條件 - 在這個臨時資料的最初生命週期產生一個命名，
 // 然後就可以垮元件使用了
 
-import { container } from "@/containers/index.js"; 
+import { container } from "@/containers/index-dist.js"; 
 const tempStore = container.resolve('tempStore')
 
 tempStore.set('myTest.name', 'ＯＴＴＯ') //- (名稱,資料)

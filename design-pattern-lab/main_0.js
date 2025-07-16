@@ -7,7 +7,7 @@ import menuComponent from "@/components/menuComponent.js";
 import DefaultLayout from "@/layouts/DefaultLayout.js";
 
 // - 容器模式製作 store
-import { container } from "@/containers/index.js";
+import { container } from "@/containers/index-dist.js";
 
 
 

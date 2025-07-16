@@ -1,5 +1,5 @@
 // @/containers/_storeFactory.js
-import { ref, reactive, toRaw } from '@Vue'
+import { ref, reactive, toRaw } from '../VueContext.js'
 //- 使用vue3處理資料綁定，提供跨元件雙向綁定
 //- 如此就不需要使用props傳遞，提供另一個資料流的做法
 //- 如果要跨頁，還是必須執行set將資料存在瀏覽器

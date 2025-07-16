@@ -1,6 +1,6 @@
 // @/components/loginComponent.js
 import { defineComponent, ref, onMounted } from "@Vue";
-import { container } from "@/containers/index.js"; 
+import { container } from "@/containers/index-dist.js"; 
 
 const langStore = container.resolve("languageStore");
 

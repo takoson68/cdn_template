@@ -1,5 +1,5 @@
 //- ApiContainer.js
-import { container } from '@/containers/index.js'
+import { container } from '@/containers/index-dist.js'
 
 export class ApiContainer {
   static instance = null

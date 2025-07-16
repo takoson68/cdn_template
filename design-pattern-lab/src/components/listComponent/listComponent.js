@@ -1,5 +1,5 @@
 // @/components/listComponent.js
-import { container } from "@/containers/index.js"; // 將 tokenStore 註冊在這裡
+import { container } from "@/containers/index-dist.js"; // 將 tokenStore 註冊在這裡
 const menuStore = container.resolve("menuStore");
 
 //--取得資料都使用api---

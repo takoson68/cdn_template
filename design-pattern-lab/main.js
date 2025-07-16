@@ -5,7 +5,9 @@
 // import { loadModulesFromMap } from '@/containers/utils/loadModulesFromMap.js'
 // await loadModulesFromMap('/design-pattern-lab/containers/module-map.json')
 
-import { container } from "@/containers/index.js";
+// import {testContainer} from "@/containers/test_bb-dist.js";
+// console.log(testContainer);
+import { container } from "@/containers/index-dist.js";
 
 import { api } from "@/api/index.js";
 

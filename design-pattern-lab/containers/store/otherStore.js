@@ -1,5 +1,5 @@
 // containers/store/otherStore.js
-import { createStore } from '@/containers/_storeFactory.js'
+import { createStore } from '../_storeFactory.js'
 
 const otherStore = createStore({
   name: 'otherStore',

@@ -2,7 +2,7 @@
 
 // 將 store 引入，跨頁存取資料。
 // import * as store  from '/store/index.js';
-import { container } from "@/containers/index.js";
+import { container } from "@/containers/index-dist.js";
 
 const calendarComponent = {
   name: 'calendarComponent',

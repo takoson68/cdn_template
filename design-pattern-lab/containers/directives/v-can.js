@@ -1,5 +1,5 @@
 // @/containers/directives/v-can.js
-import { hasPermission } from '@/containers/utils/permissionUtils.js'
+import { hasPermission } from '../utils/permissionUtils.js'
 
 const vCanDirective = {
   mounted(el, binding) {

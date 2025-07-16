@@ -1,5 +1,5 @@
 // @/containers/store/permissionStore.js
-import { createStore } from '@/containers/_storeFactory.js'
+import { createStore } from '../_storeFactory.js'
 
 const permissionStore = createStore({
   name: 'permissionStore',

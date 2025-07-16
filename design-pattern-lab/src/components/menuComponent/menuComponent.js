@@ -2,7 +2,7 @@
 
 import { nextTick } from "@Vue";
 import loginComponent from "@/components/loginComponent/index.js";
-import { container } from "@/containers/index.js"; // 將 tokenStore 註冊在這裡
+import { container } from "@/containers/index-dist.js"; // 將 tokenStore 註冊在這裡
 const menuStore = container.resolve("menuStore");
 const tokenStore = container.resolve("tokenStore");
 const langStore = container.resolve("languageStore");

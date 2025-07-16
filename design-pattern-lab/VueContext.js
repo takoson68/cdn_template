@@ -1,4 +1,4 @@
-import * as Vue from '@/vendors/vue/vue.esm-browser.prod.js'
+import * as Vue from '../vendors/vue/vue.esm-browser.prod.js'
 
 // window.Vue = Vue
 

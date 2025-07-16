@@ -1,5 +1,5 @@
 // @/components/todoListComponent.js
-import { container } from '@/containers/index.js'
+import { container } from '@/containers/index-dist.js'
 
 const todoStore = container.resolve('todoStore')
 

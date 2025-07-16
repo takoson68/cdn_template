@@ -1,5 +1,5 @@
 // @/containers/store/testStore.js
-import { createStore } from '@/containers/_storeFactory.js'
+import { createStore } from '../_storeFactory.js'
 
 export default createStore({
   name: 'testStore',
