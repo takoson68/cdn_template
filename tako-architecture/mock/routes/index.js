@@ -1,10 +1,10 @@
 import myMenu from '../data/menuData.js'
-import *  as mackSet  from './mackSet.js'
+import *  as mockSet  from './mockSet.js'
 // Mock 一個 API 回應
 const Random = Mock.Random;
 const listCount = Random.integer(23, 60);// 隨機生成數據數量
 
-const { start, end } = mackSet.getThreeMonthRangeFromToday();
+const { start, end } = mockSet.getThreeMonthRangeFromToday();
 
 export const mockRoutes = {
   '/api/login': (options) => {
