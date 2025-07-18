@@ -1,20 +1,103 @@
+// rollup.config.mjs
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import alias from '@rollup/plugin-alias'
+import path, { join, extname, basename, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { readdirSync, statSync, rmSync } from 'fs'
+import banner2 from 'rollup-plugin-banner2'
+// ⛳ __dirname 模擬
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-export default {
-  input: './containers/index.js', // 你所有 import 的統一入口
+// ✅ 每次 build 時清空 dist 資料夾
+const distDir = path.resolve(__dirname, 'src/dist')
+rmSync(distDir, { recursive: true, force: true }) // ⬅️ 強制遞迴刪除
+
+// ✅ 路徑 alias
+const aliasEntries = [
+  { find: '@', replacement: path.resolve(__dirname, 'src') },
+  { find: '@Vue', replacement: path.resolve(__dirname, 'vendors/vue/vue.esm-browser.prod.js') }
+]
+
+// ✅ 外部排除模組
+const externalLibs = [
+  'vue',
+  '@Vue',
+  '@/containers/index-dist.js',
+  '@/api/index.js',
+  '../../vendors/vue/vue.esm-browser.prod.js',
+  '../vendors/vue/vue.esm-browser.prod.js',
+  '@/containers/directives/v-can.js',
+  '@/containers/style-container.js',
+  path.resolve(__dirname, '../vendors/vue/vue.min.js'),
+]
+
+// ✅ 容器單一入口
+const containerConfig = {
+  input: path.resolve(__dirname, 'containers/index.js'),
   output: {
-    file: './containers/index-dist.js',
-    format: 'es', // ✅ 保持 ES Module 格式（也可設為 'iife' 或 'umd'）
+    file: path.resolve(__dirname, 'containers/index-dist.js'),
+    format: 'es',
     sourcemap: false
   },
-  external: ['vue','Vue','@Vue','../vendors/vue/vue.esm-browser.prod.js'], // ✅ 告訴 Rollup 不要打包 vue
   plugins: [
-    resolve(),   // ✅ 解析 import 的模組
-    commonjs()   // ✅ 若有使用 CommonJS（可選）
-  ]
+    alias({ entries: aliasEntries }),
+    resolve(),
+    commonjs()
+  ],
+  external: externalLibs
+}
+
+// ✅ 頁面批次設定
+const pagesDir = path.resolve(__dirname, 'src/pages')
+const pageDirs = readdirSync(pagesDir, { withFileTypes: true })
+  .filter(entry => entry.isDirectory())
+  .map(entry => entry.name)
+
+const pageConfigs = pageDirs.map(pageName => ({
+  input: path.join(pagesDir, pageName, 'index.js'),
+  output: {
+    dir: path.resolve(__dirname, 'src/dist/pages'),
+    format: 'es',
+    sourcemap: false,
+    entryFileNames: `${pageName}.js`
+  },
+  plugins: [
+    alias({ entries: aliasEntries }),
+    resolve(),
+    commonjs()
+  ],
+  external: externalLibs
+}))
+
+const componentsConfig = {
+  input: path.resolve(__dirname, 'src/components/index.js'), // 你的 components 街口
+  output: {
+    file: path.resolve(__dirname, 'src/components/components.js'),
+    format: 'es', // ✅ 要能 script 引入，推薦 iife
+    name: 'ComponentsBundle', // 全域變數名稱（optional）
+    sourcemap: false,
+    inlineDynamicImports: true, // ✅ 關鍵：讓所有 import 都內嵌
+  },
+  plugins: [
+    alias({ entries: aliasEntries }),
+    banner2(() => 'window.__IS_BUNDLED_COMPONENTS__ = true;\n'),
+    resolve(),
+    commonjs()
+  ],
+  external: externalLibs
 }
 
 
-// npx rollup -c  
-// 執行指令
+
+// ✅ 匯出組合
+export default [
+  containerConfig,
+  componentsConfig,
+  ...pageConfigs
+]
+
+
+
+//  npx rollup -c

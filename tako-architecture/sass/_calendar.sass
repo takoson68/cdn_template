@@ -1,0 +1,142 @@
+
+.calendarTemp
+  width: 100%
+  max-width: 340px
+  min-width: 300px
+  margin: 0 auto
+  border: 1px solid #dddddd
+  border-radius: 8px
+  overflow: hidden
+  font-family: Arial, sans-serif
+
+  .calendar-header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background-color: #cccccc
+    padding: 10px
+    font-size: .9em
+    font-weight: bold
+    white-space: nowrap
+    button
+      background-color: #777777
+      color: #dddddd
+      border: 1px solid #777777
+      border-radius: 4px
+      font-size: .8em
+      padding: .15em .25em
+      +center
+  .prev,.next 
+    &::after,&::before
+      display: inline-flex 
+      padding: .15em .35em
+      background-color: #dddddd
+      color: #777777
+      border-radius: 4px
+      font-size: .8em
+      font-weight: bolder
+  .prev
+    &::before
+      content: '<'
+      margin-right: .25em
+  .next 
+    &::after
+      content: '>'
+      margin-left: .25em
+
+  .calendar-body
+    padding: 10px
+
+  .calendar-week,.calendar-dates
+    display: grid
+    grid-template-columns: repeat(7, 1fr)
+    text-align: center
+    font-weight: bold
+
+  .calendar-date
+    // padding: .5em 0
+    border-radius: 4px
+    cursor: pointer
+    margin: 1px
+    +size(2.3em)
+    +center
+    &:empty
+      padding: 0
+      cursor: auto
+      +size(0)
+    &--disabled
+      color: #ccc
+
+    &--today
+      background-color: #ffdd57
+      color: #333
+      font-weight: bold
+      border: 2px solid #ffdd57
+      border-radius: 3em
+    &--weekend
+      background-color: #eeeeee
+      color: #777777
+      border-radius: 3em
+    &--selected
+      background-color: #add8e6 // 淡藍色底色
+      color: #333
+      font-weight: bold
+      
+  .calendar-date--highlighted
+    // background-color: lightblue
+    position: relative
+    &::before
+      content: ""
+      background-color: red 
+      border-radius: 1em
+      width: .5em
+      height: .5em 
+      display: inline-block
+      position: absolute
+      right: .25em
+      top: .25em
+
+
+
+
+.calendar
+  .dateR
+    hr 
+      border: 4px solid #cccccc
+      border-radius: 4px
+      margin: 3em 0em
+
+    h4 
+      padding: 1em 1em 1em 2em
+      font-size: 1.2em
+      background-color: $colorZ6
+      border-top-left-radius: .5em
+      border-top-right-radius: .5em
+      color: $colorZ9
+      display: flex
+      min-height: 1em
+      
+      span
+        position: relative
+        flex: 1
+        padding-left: 1em
+        &::before
+          content: ""
+          position: absolute
+          border-top: .35em double $colorZ7
+          top: .4em
+          left: -1em
+          width: 1.5em
+          display: flex
+          // margin-left: 4.5em
+        &::after
+          content: ""
+          position: absolute
+          border-top: .35em double $colorZ7
+          top: .4em
+          width: calc( 100% - 5.75em )
+          display: flex
+          margin-left: 4.75em
+
+
+

@@ -1,0 +1,58 @@
+
+script(type="text/x-template", id="listpapa-component")
+  template 
+    div.lsitCon
+      p.acct.addActLine
+        span
+          input( v-model="myS" placeholder="新增攻擊來源")
+          select(v-model="myS" )
+            option( :value="null" disabled selected) 選取 
+            option( v-for="(item,j) in mySBox" :key="j" :value="item") {{item}}
+        //- span
+          input( v-model="myE" placeholder="新增攻擊名稱")
+          select(v-model="myE" @change="changeIp(allPoint,myE)")
+            option( :value="null" disabled selected) 選取 
+            option( v-for="item in allPointList(allPoint,myS)" :key="item[0]" :value="item[0]") {{item[0]}}
+
+        input( v-model="myEip" @keydown="allowNumeric(event)" placeholder="攻擊來源 IP")
+        button.btn.acctS(@click="addStart") 新增來源
+      //- hr
+      listdata( :md-data="mdData" :tree-box="treeBox" :all-point="allPoint" :a2z-list="a2zList" :point-cut="aaa") 
+    
+
+//---子組件命名只能使用全小寫不然會錯誤------- ▲ ▶ ▶ ▼ ▲ ------
+script(type="text/x-template", id="listdata-component")
+  template
+    ul.listTop()
+      li( v-for="(item, index) in mdData" :key="index")
+        .lsitCon(:class="item.nb")
+          p.conValue() 
+            b.opencreat(@click="opencreat(item,index,mdData)" title="新增" v-if="!item.end") ✛
+            //- input(disabled="disabled" v-model="item.s")
+            input(disabled="disabled" v-model="item.e")
+            input.inp15( v-model="item.ip" @keydown="allowNumeric(event)" placeholder="攻擊單位 IP" :disabled="!!item.end")
+            input(v-if="!item.one" v-model="item.n" placeholder="攻擊單位間行為")
+            input(v-if="!item.one" v-model="item.r" placeholder="攻擊 行為內容")
+            span.setFlexIcon.onlySelect(v-if="!item.one") 
+              //- input(v-model="item.textset.icon" placeholder="選擇圖示ＩＣＯＮ")
+              select(v-model="item.textset.icon" :class="item.textset.icon==''&&'onNo'")
+                option( value="" selected) == 無圖片 ==
+                option( v-for="icon in typeIcon" :key="icon[0]" :value="icon[0]") {{icon[1]}}
+
+            b.removeMe(@click="removeMe(mdData,index)" title="刪除(＊子項目將一並刪除)") -
+            span.openUl(v-if="item.children && item.children.length > 0" :class="showChildren[index]?'showClo':''" @click="openData(index)" title="開關") {{!showChildren[index]?'▼':'▲'}}
+
+          p.addActLine(v-show="item.open")
+            input(v-model="newDD.s" disabled="disabled")
+            span
+              input(v-model="newDD.e" placeholder="目標(書寫或選取)" :ref="'input_'+item.s2+'-'+index")
+              select(v-model="newDD.e" @change="changeIp(allPoint,newDD.e)")
+                option( :value="null" disabled selected) 選取 
+                option( v-for="item in allPointList(allPoint,newDD.s)" :key="item[0]" :value="item[0]") {{item[0]}}
+            input(v-model="newDD.ip" placeholder="攻擊單位 IP" @keydown="allowNumeric(event)")
+            input(v-model="newDD.n" placeholder="攻擊 單位間行為")
+            input(v-model="newDD.r" placeholder="攻擊 行為內容")
+            button.btn(@click="addNewLine(item,index)") 新增路線   
+            
+        template( ) 
+          listdata( v-show="showChildrenBox(index)" :md-data="item.children" :tree-box="treeBox" :all-point="allPoint" :a2z-list="a2zList") 

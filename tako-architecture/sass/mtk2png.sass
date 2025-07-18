@@ -1,0 +1,1158 @@
+@import reset
+// @import compass
+@import font
+// @import bourbon/bourbon
+@import breakpoint
+@import mixin
+@import theme
+@import arryMap
+@import system
+
+body,html
+  background-color: $sys1
+  overflow-y: auto !important
+
+
+canvas
+  position: fixed
+  z-index: -11
+  top: 100vh
+  left: 1000vw
+
+.mtk2png
+  display: flex
+  padding: .5em 1em
+  // max-width: 1124px
+  // background-color: $sys3
+  margin: auto
+  // box-shadow: 0 0 1em $sys0
+  flex-direction: column
+  &.mtk2mad .mdTopng 
+    // width: 60%
+    width: 40%
+    padding-right: .5em
+    // min-width: 0 !important
+    // flex: 2
+  .sys_title 
+    color: $sys2
+    font-size: 1.8em
+    padding: .5em  .5em  0em  .5em 
+    +center
+    h1 
+      padding: .5em 2em
+      background-color: $sys0
+      border-radius: 8px 
+      display: block
+      width: 100%
+      text-align: center
+      a 
+        color: #ff6600   
+        margin-left: 1em
+
+  section.dataInfo ul li span
+    cursor: auto
+
+  section
+    padding: 1em
+
+
+section#mtkBox
+  display: flex
+  flex-direction: row
+  height: calc( 100vh - 93px )
+  overflow: hidden
+  padding-bottom: 0em
+  .mdTopng
+    // flex: 1
+    min-width: 300px
+    position: relative
+    max-width: 1200px
+    display: flex 
+    flex-direction: column
+    // padding-bottom: 1em
+    .actTitle
+      color: $sys2
+      font-size: 1.5em
+      border-bottom: 2px solid $sys2
+      margin-right: 2rem
+      line-height: .75em
+      small 
+        font-size: .7em
+        i 
+          padding-left: 1em
+          opacity: .5
+          font-size: .5em
+      & + small 
+        color: $sys2
+        padding-left: 1em
+        i 
+          padding-left: 1em
+          opacity: .5
+    .creatNewAct 
+      border-bottom: 2px solid $sys2
+      margin-right: 2rem
+      font-size: 1em
+      padding: .5em
+      display: flex
+      justify-content: center
+      align-items: center
+      // width: 100%
+        
+      input,select
+        padding: .25rem .5rem
+        flex: 1
+        width: 22%
+        height: 2rem
+        margin: .25rem
+        border-radius: 4px
+        border: none
+        font-size: .8em
+      span 
+        flex: 1
+        width: 33%
+        display: flex
+        input
+          flex: 3
+          width: 65%
+          margin-right: 0
+          border-bottom-right-radius: 0
+          border-top-right-radius: 0
+        select
+          width: 2rem !important
+          max-width: 2rem
+          margin-left: 0
+          border-bottom-left-radius: 0
+          border-top-left-radius: 0
+          border-left: 1px solid #cccccc
+
+      button 
+        position: relative
+        width: 5rem
+        right: 0
+        top: 0
+        height: 2rem
+        margin-left: .25rem
+        font-size: .8em
+    textarea, .dataListMad 
+      flex: 1
+      width: 100% 
+      height: 100%
+      min-height: 65vh
+      padding: 0em 3em 1em 1em
+      background-color: $sys1
+      color: $sys2
+      font-size: 12px
+      overflow: auto
+    .setInText 
+      display: inline-flex
+      flex-direction: row
+      flex-wrap: wrap
+      position: absolute
+      bottom: 0em
+      left: 0
+      width: calc( 100% - .7em )
+      height: 25vh
+      z-index: 9999999
+      padding: 1em 0em 3em 1em
+      background-color: $sys3
+      select
+        width: 50%
+        max-width: 240px
+        margin-right: 50%
+        height: 2em
+        border-radius: 4px
+        margin-bottom: .25em
+        padding-left: .5em
+        font-size: .9em
+      textarea
+        width: 80% 
+        min-height: 100%
+        min-width: 60%
+        margin-right: 1.5em
+        padding: 1em
+        // color: $colorZ1
+
+      button 
+        position: relative
+        width: 20%
+        min-height: 70%
+        // right: 0
+        padding: 0
+      .cloSetText
+        position: absolute
+        +center
+        +size(1.5em)
+        border-radius: 1em 
+        background-color: $sysbor
+        top: 1em 
+        right: 1em
+        color: $colorZ9
+        cursor: pointer
+    .dragWidth 
+      width: 10px 
+      background-color: nth($colorArr, 3)
+      height: 100%
+      position: absolute
+      top: 0
+      right: 0
+      z-index: 100
+      cursor: all-scroll
+      cursor: col-resize
+      +center
+      .rr90 
+        font-size: 1em
+        color: darken(nth($colorArr, 3),5% )
+        transform: rotate(90deg)
+        border: 2px solid darken(nth($colorArr, 3),5% )
+        background-color: darken(nth($colorArr, 3),25% )
+        +center
+        border-radius: 4px
+    .readerPic
+      display: flex
+      width: 100% 
+      flex: 1 
+      height: 3em
+      position: relative
+      background-color: $sys3
+      padding: 0 1em
+      +center
+      button ,input,label
+        position: relative
+        flex: 1
+        height: 2.5em
+        left: 0
+        right: 0
+        top: 0 
+        bottom: 0
+        font-size: .8em
+        cursor: pointer
+        &.flex_1
+          margin-right: .5em
+        & + label
+          // margin-left: .5em
+      label
+        flex: 2
+        width: 50%
+        // font-size: .7em
+  #printable
+    background-color: lighten($colorZ8,8% )
+    height: calc( 100% - 4em )
+    position: relative
+    cursor: move
+    overflow: auto
+    flex: 1
+// 拖曳時取消點擊功能
+.dragDiv
+  pointer-events: none
+
+
+
+
+$w: 12
+$box_w: $w+em
+$img_w: ($w*0.66666)+em
+$img_f: ($w*0.4)+em
+
+ul.box 
+  position: relative
+  padding: 2em
+  padding-top: 4em
+  padding-right: 6em
+  background: #ffffff
+  display: inline-grid
+  // min-width: 1400px
+  padding-bottom: 6em
+  & > li 
+    display: flex
+    padding-left: 2em !important
+    position: relative
+    background-color: $colorZ9
+  li 
+    padding-left: 18em
+    padding-right: 1em
+    position: static
+    width: fit-content
+    background-color: $colorZ9
+    ul 
+      position: static
+      li 
+        position: static
+       
+.boxName 
+  position: static
+  // z-index: 1
+  +center
+  width: $box_w 
+  height: auto
+  // padding-bottom: 1em
+  // margin-top: 1em
+  margin-bottom: 6em
+  // background-color: rgba(#ddd,.2)
+  flex-direction: column
+  &.art
+    .imgBox 
+      background-image: url("../images/hacker-logo.jpeg")
+      border: none
+      cursor: auto
+      box-shadow: none
+      background-position: center 45%
+      background-size: 13em
+    b 
+      // width: $box_w
+  b 
+    background-color: nth($colorArr, 3)
+    color: $colorZ9
+    border-radius: .5em
+    width: 100% 
+    min-height: 3.3em
+    padding: .25em 0
+    +center
+    flex-direction: column
+    position: relative
+    top: -1.25em
+    border: 2px solid darken(nth($colorArr, 3),8% )
+    em 
+      +center
+      text-align: center
+      height: 1.4em
+      width: 100% 
+      border-bottom: 1px solid darken(nth($colorArr, 3),8% )
+    small
+      +center
+      text-align: center
+      height: 1.4em
+      width: 100% 
+      border-top: 1px solid lighten(nth($colorArr, 3),14% )
+  .imgBox 
+    +size($img_w)
+    +center
+    // background-color: lighten(nth($colorArr, 4),10% )
+    border-radius: 100%
+    // background-image: url("../images/computer.jpeg")
+    background-position: center 
+    background-size: 11em
+    // box-shadow: inset 0 0 1em nth($colorArr, 4)
+    border: 4px solid nth($colorArr, 4)
+    cursor: pointer
+    span 
+      font-size: $img_f
+      color: $colorZ9
+.noBrb
+  border-bottom: none !important
+
+.imgBox
+  position: relative
+  &:hover 
+    .imgListBox 
+      display: inline-flex
+      flex-direction: column
+  .typeStatusBox
+    position: absolute
+    top: -1em
+    right: -4.5em
+    width: 5em
+    height: 8em
+    display: inline-flex
+    flex-direction: row
+    flex-wrap: wrap
+    flex-direction: column
+    .typeStatus
+      position: relative
+      border-radius: 50% 
+      +size(2.5em)
+      +center
+      border: 4px solid nth($colorArr, 4)
+      background-color: nth($colorArr, 1)
+      span 
+        font-size: 1.5em !important
+        color: $colorZ9 !important
+  .imgListBox 
+    display: none
+    width: 24em
+    background-color: lighten(nth($colorArr, 4),35% )
+    border: 1px solid nth($colorArr, 4)
+    position: absolute
+    top:  -5em
+    right: 92%
+    border-radius: .5em
+    z-index: 3
+    box-shadow: 0 0 1em $colorZ3
+    &::after
+      position: absolute
+      right: -2em
+      top: 8em
+      content: ""
+      width: 0
+      height: 0
+      border-style: solid
+      border-width: 1em 0 1em 2em
+      border-color: transparent transparent transparent lighten(nth($colorArr, 4),35% )
+    ul 
+      display: flex
+      padding-left: 0
+      padding: 1em .5em .5em .5em
+      flex-wrap: wrap
+      justify-content: flex-start
+      font-size: .9em
+      cursor: auto
+      li 
+        padding-left: 0 
+        padding: .3em .75em
+        background-color: nth($colorArr, 4)
+        color: $colorZ9
+        margin: .25em .25em .15em .25em
+        border-radius: 4px
+        input,label
+          cursor: pointer
+      b 
+        min-height: 1.4em
+        top: 0
+        margin-bottom: .5em
+        background-color: lighten(nth($colorArr, 5),15% )
+        border: 1px solid nth($colorArr, 5)
+    hr 
+      margin-bottom: 0px
+      width: calc( 100% - 2px )
+      border: none
+      border-bottom: 1px solid lighten(nth($colorArr, 4),10% )
+.flo_0
+  position: absolute
+  top: 0
+  display: flex
+
+// .flo_1
+  // top: 2em
+  // padding-bottom: 2em
+
+// .flo_2
+  // top: 2em
+//   display: flex
+// .flo_3
+  // top: 4em
+
+.flo_0,.flo_1,.flo_2,.flo_3,.flo_4
+  display: flex
+
+
+// ul.box li ul li.flo_0 
+//   padding-bottom: 1em
+    
+#mtkInit
+  position: relative
+  transform-origin: top left
+  #svgBox
+    position: absolute
+    top: 0
+    left: 0
+    width: calc( 100% - 4em ) 
+    height: calc( 100% ) 
+    z-index: 0
+    // background-color: rgba(red,.1)
+    // border: 1px solid nth($colorArr, 3)
+    // pointer-events: none
+
+.testPath
+  position: relative
+  z-index: 1
+  cursor: grab
+  &:hover
+    // fill: red
+    stroke: red !important
+    filter: drop-shadow(0px 0px 10px red)
+  ~ g
+    circle:hover
+      filter: drop-shadow(0px 0px 10px red)
+
+
+.dragText
+  position: relative
+  z-index: 2
+
+
+.btn
+  background-color: #e21e6c
+  border: 1px solid nth($colorArr, 1)
+  padding: .35em 1em 
+  border-radius: 4px 
+  cursor: pointer
+  text-shadow: 1px 0 1px darken(nth($colorArr, 4),30% )
+  background-image: linear-gradient(to top, nth($colorArr, 1) 0%, #e21e6c 100%)
+  color: $colorZ9
+  box-shadow: 0 0 1em darken(nth($colorArr, 1),30% )
+  position: absolute
+  // top: 2.5em 
+  // right: 50% 
+  margin-right: -640px
+  z-index: 1000000
+  right: 1em
+  margin-right: 0
+  font-size: 1rem
+  +breakpoint($deskbig)
+    position: fixed
+  b 
+    padding-left: .25em
+  &.top_right
+    margin-right: 2em
+
+
+.acct 
+  padding: .5em 0 
+  display: flex 
+  
+  &.addActLine
+    position: sticky
+    top: 0em
+    left: 0
+    background-color: $sys1
+    z-index: 2
+    margin: 0em -3em 1em 0
+    padding-top: 1em
+    padding-bottom: 1em
+    border-bottom: solid 2px $sys4
+    &::before
+      display: none
+  input
+    border-radius: 4px
+    border: none
+    padding: .25em 1em
+  button.acctS 
+    position: relative
+    padding: .35em 1em
+    font-size: .85em
+    right: 0
+  & + .listTop
+    > li 
+      margin-bottom: 2em 
+#boxLi 
+  padding-top: 10em
+  padding-bottom: 2em
+  position: relative
+
+
+.scale
+  font-size: .8em
+  position: fixed
+  bottom: 2rem
+  margin-left: 2rem 
+  z-index: 10
+  cursor: auto
+  ul 
+    display: flex 
+    // flex-direction: row
+    li 
+      padding: .5em 1em 
+      background-color: nth($colorArr, 4) 
+      color: $colorZ9 
+      margin: .25em
+      border-radius: 4px
+      cursor: pointer
+      border: 1px solid lighten(nth($colorArr, 4) ,15% )
+      &.pickMen 
+        background-color: darken(nth($colorArr, 4) ,25% )
+        border: 1px solid darken(nth($colorArr, 4) ,15% )
+.linkColor 
+  position: fixed
+  bottom: 2.5rem
+  right: 0
+  margin-right: 2rem 
+  z-index: 10
+  background-color: $colorZ8
+  border-radius: 4px
+  padding-left: .5em
+  cursor: auto
+  // input
+  ul
+    font-size: .6em
+    +center
+    flex-direction: row
+    li 
+      padding: .25em 1em
+      cursor: pointer
+
+
+
+.typeList
+  position: absolute
+  bottom: 1.5em
+  // bottom: -8em
+  left: 2em 
+  display: inline-flex
+  font-size: .6em
+  max-height: 8em
+  b 
+    +center
+    margin-right: 1.5em
+    background-color: nth($colorArr,5)
+    color: $colorZ9 
+    border-radius: 4px
+    padding: .25em 1em
+    min-width: 10em
+    span 
+      margin-right: .5em
+
+
+// .lsitCon:focus
+//   border: 1px solid red !important
+
+//-------------------------------------------
+.mtk2png.mtk2mad
+  padding-bottom: 0em
+  section.sys_title 
+    h1
+      color: $colorZ8
+  .scale 
+    bottom: 1em
+    margin-left: 1rem
+  .dataListMad 
+    ul
+      
+      li 
+        ul
+          position: relative
+          padding-left: 2em
+          // border-bottom: 1px solid $sys2
+          .lsitCon
+            position: relative
+
+          li
+            position: relative
+            padding-bottom: .5em
+            &::before 
+              position: absolute
+              content: ""
+              border-left: 1px solid $sys2
+              height: 100%
+              left: -.9em
+              top: 0%
+            &:last-child::before 
+              display: none
+          .lsitCon
+            position: relative
+            // padding: .5em
+            &::before
+              content: ""
+              height: 1.4em
+              width: 1em
+              border-left: 1px solid $sys2
+              border-bottom: 1px solid $sys2
+              position: absolute
+              top: -.6em
+              left: -.9em
+              border-bottom-left-radius: .5em
+            &::after
+              content: ""
+              width: 0
+              height: 0 
+              position: absolute
+              left:  -.1em
+              top: .58em
+              border-style: solid
+              border-width: .25em 0 .25em .5em
+              border-color: transparent transparent transparent $sys2
+
+
+    .lsitCon
+      // &::before
+      //   content: ''
+      //   display: block
+      //   position: absolute
+      //   +size(100%)
+      //   top: 0
+      //   left: 0
+      //   // background-color: rgba(0,0,0,0.6)
+
+      p.conValue
+        display: flex 
+        width: 100%
+        margin-top: .5em
+        margin-bottom: .5em
+        position: relative
+
+        b.opencreat
+          background-color: nth($colorArr, 1)
+          position: absolute
+          left: .75em
+          top: 0.5em
+          color: $colorZ9
+          +size(1em)
+          +center
+          border-radius: 1em
+          cursor: pointer
+          & + input[disabled]
+            padding-left: 2em
+            opacity: 0.6 !important
+        input[disabled] + input[disabled] 
+          // opacity: .5 !important
+          padding-left: 1em
+        b.removeMe
+          background-color: $colorP0
+          position: absolute
+          right: -1.25em
+          top: 0.5em
+          color: $colorZ9
+          +size(1em)
+          +center
+          border-radius: 1em
+          cursor: pointer
+        b.addInText
+          background-color: nth($colorArr,4)
+          color: $colorZ9
+          cursor: pointer
+          +size(1em)
+          +center
+          border-radius: 1em
+          position: absolute
+          top: 0.7em
+          right: -3.5em
+          padding: .75em
+          font-size: .75em
+      input 
+        padding: .25em 1em 
+        border-radius: 4px
+        width: 25%
+        border: none 
+        margin: 0 .25em
+        flex: 1
+        &[disabled]
+          color: $colorZ9 !important
+          max-width: 10rem
+          pointer-events: none
+        &:focus
+          // border: red 1px solid
+      .inp15
+        max-width: 7.5rem
+      select,b,input
+        // z-index: 2
+p.addActLine 
+  // padding-left: 2em
+  // margin-bottom: .5em
+  // margin-left: 1.5rem
+  font-size: 1em
+  padding: .5em
+  display: flex
+  justify-content: center
+  align-items: center
+  // width: 100%
+
+  &::before 
+    position: absolute
+    content: ""
+    border-left: 1px solid $sys2
+    height: calc(100% + .5em)
+    left: -.9em
+    top: -.5em
+  input,select
+    padding: .25rem .5rem
+    flex: 1
+    width: 22%
+    height: 1.5rem
+    margin: .25rem
+    border-radius: 4px
+    border: none
+    font-size: .8em
+  span 
+    flex: 1
+    width: 33%
+    min-width: 24%
+    display: flex
+    margin-right: .2em
+    input
+      flex: 3
+      width: 65%
+      margin-right: 0
+      border-bottom-right-radius: 0 !important
+      border-top-right-radius: 0 !important
+      margin: 0
+    select
+      margin: 0
+      width: 2rem !important
+      max-width: 2rem
+      margin-left: -1pc
+      border-bottom-left-radius: 0
+      border-top-left-radius: 0
+      border-left: 1px solid #cccccc
+  button  
+    position: relative
+    right: 0
+    height: 1.5rem
+    +center
+    font-size: .8em
+    margin-left: .25em
+
+
+
+span.setFlexIcon 
+  flex: 1
+  width: 20%
+  // min-width: 18%
+  display: flex
+  margin-right: .2em
+  input,select
+    padding: .25rem .5rem
+    flex: 1
+    width: 22%
+    height: 1.5rem
+    margin: .25rem
+    border-radius: 4px
+    border: none
+    font-size: .8em
+  input
+    flex: 1
+    width: 65%
+    margin-right: 0
+    border-bottom-right-radius: 0 !important
+    border-top-right-radius: 0 !important
+    margin: 0
+  select
+    flex: 1
+    margin: 0
+    // width: 2rem !important
+    // max-width: 2rem
+    margin-left: -1pc
+    border-bottom-left-radius: 0
+    border-top-left-radius: 0
+    border-left: 1px solid #cccccc
+    &.onNo
+      color: $colorZ7
+  &.onlySelect 
+    margin-left: 1.5em
+    select
+      border-radius: .5em
+
+      
+.onNo
+  color: $colorZ7
+
+svg
+  text
+    tspan
+      cursor: grab
+      & + tspan
+        cursor: auto
+    // text-anchor: middle
+
+
+::placeholder
+  color: $colorZ7
+  opacity: 1
+
+
+::-ms-input-placeholder 
+  color: $colorZ7
+
+
+.pathStyleSet
+  position: fixed
+  bottom: 5.25em
+  right: 1em
+  background-color: $sys1
+  z-index: 111
+  cursor: auto
+  display: flex
+  padding: .5em
+  width: 458px
+  &.lsitCon 
+    flex-direction: column
+    font-size: .9em
+    .setInfo
+      display: flex
+      padding-bottom: .5em
+    button
+      padding: .25em .5em
+      position: relative
+      right: 0
+      box-shadow: none
+      border-bottom-left-radius: 0
+      border-top-left-radius: 0
+      font-size: .8em
+    input,select
+      padding: .25em 1em 
+      border-radius: 4px
+      width: 25%
+      border: none 
+      margin: 0 .25em
+      &[type='number']
+        padding-right: 0
+        margin-left: .5em
+        border-top-left-radius: .5em !important
+        border-bottom-left-radius: .5em !important
+        & + button
+          cursor: auto
+      &[disabled]
+        color: $colorZ9 !important
+    span 
+      flex: 1
+      width: 33%
+      min-width: 24%
+      display: flex
+      margin-right: .2em
+      input
+        flex: 3
+        width: 65%
+        margin-right: 0
+        border-bottom-right-radius: 0 !important
+        border-top-right-radius: 0 !important
+        margin: 0
+      select
+        margin: 0
+        width: 2rem !important
+        max-width: 2rem
+        margin-left: -1pc
+        border-bottom-left-radius: 0
+        border-top-left-radius: 0
+        border-left: 1px solid #cccccc
+
+    input
+      flex: 1
+      width: 65%
+      margin-right: 0
+      border-bottom-right-radius: 0 !important
+      border-top-right-radius: 0 !important
+      margin: 0
+      &.inp_1
+        color: $colorZ9
+    select
+      margin: 0
+      width: 2rem !important
+      max-width: 2rem
+      margin-left: -1pc
+      border-bottom-left-radius: 0
+      border-top-left-radius: 0
+      border-left: 1px solid #cccccc
+
+
+  ul.colorSetBox  
+    // position: fixed
+    right: .5em
+    bottom: 6.5em
+    width: 100%
+    display: inline-flex
+    flex-wrap: wrap
+    li
+      +size(1.6em,1em)
+      min-width: 1em
+      margin-right: 3px
+      border: 1px solid $colorZ9
+      cursor: pointer
+      margin-bottom: .25em
+
+
+
+// $base-color: #036
+
+@for $i from 1 through 5
+  .flex_#{$i}
+    flex: #{$i} !important
+
+
+input.inp_1.flex_3
+  border-radius: .5em !important
+  & + input 
+    border-bottom-left-radius: 0 !important
+    border-top-left-radius: 0 !important
+    border-left: solid $sys2 1px !important
+
+
+.textIcon
+  position: absolute
+  +center
+  +size(2rem)
+  border-radius: 2em
+  span 
+    +size(100%)
+    +center
+    // background-color: nth($colorArr,4)
+    // border-radius: 2em
+    // border-width: 3px
+    border-style: solid
+    color: #ffffff
+    // overflow: hidden
+
+.icontext
+  circle
+    z-index: 0
+  image 
+    fill: #ffffff
+    z-index: 1111
+
+
+
+span.openUl
+  +size(1.5em)
+  +center 
+  border-radius: 2em
+  // color: $colorZ9
+  cursor: pointer
+  background-color: nth($colorArr,3)
+  color: $colorZ9
+  position: absolute
+  top: 2.8em
+  left: .95em
+  font-size: .7em
+  z-index: 1
+  &.showClo
+    background-color: $sys1
+    color: nth($colorArr,3)
+    border: 1px solid nth($colorArr,3)
+// .openF
+//   & + ul.listTop
+//     display: none
+
+
+*
+  box-sizing: border-box
+
+
+
+
+
+
+
+$placeholder: ['::-webkit-input-placeholder', ':-moz-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', '::input-placeholder', '::placeholder']
+.setInText
+  @each $selector in $placeholder 
+    #{$selector} 
+      color: $colorZ3 !important
+    
+// .setInText
+//   textarea::placeholder 
+//     color:#f00
+
+
+
+svg#svgBox
+  &.focusMe
+    z-index: 1 !important
+    & > g:not(.focusEle)
+      opacity: .2
+      pointer-events: none
+
+g.focusEle 
+  // opacity: 1 !important
+
+
+.pathStyleSet
+  hr 
+    width: 100% 
+    
+  .lineTheme
+    input 
+      +size(1em)
+
+.lineSetBox
+  padding: .1em 0 .5em 0
+  color: $sys2
+
+
+
+$setW : 8px // 四邊線段寬度
+
+.line-theme-square
+  position: relative
+  +size($setW * 4)
+  margin: 0 .5em
+
+.lineTheme
+  position: absolute
+  pointer-events: auto
+  cursor: pointer
+
+  input
+    display: none
+
+
+
+/* 上
+
+.theme-1
+  top: 0
+  left: 0px
+  right: 0px
+  height: $setW
+  background-color: #333
+  clip-path: polygon(0 0, 100% 0, calc(100% - $setW) 100%, $setW 100%)
+
+/* 右
+
+.theme-2
+  top: 0px
+  bottom: 0px
+  right: 0
+  width: $setW
+  background-color: #333
+  clip-path: polygon(100% 0, 100% 100%, 0 calc(100% - $setW), 0 $setW)
+
+/* 下
+
+.theme-3
+  bottom: 0
+  left: 0px
+  right: 0px
+  height: $setW
+  background-color: #333
+  clip-path: polygon(0 100%, 100% 100%, calc(100% - $setW) 0, $setW 0)
+
+/* 左
+
+.theme-4
+  top: 0px
+  bottom: 0px
+  left: 0
+  width: $setW
+  background-color: #333
+  clip-path: polygon(0 0, 0 100%, 100% calc(100% - $setW), 100% $setW)
+
+/* 選中狀態高亮
+
+.lineTheme
+  input:checked + span, &:has(input:checked)
+    background-color: #4caf50
+
+
+.setBox 
+  b
+    display: inline-flex  
+    align-items: center
+
+label.useSetLine
+  display: inline-flex  
+  align-items: center
+  cursor: pointer
+  input 
+    margin: 0 0.25em !important
+
+
+.addLinePoint,.useLinePoint
+  border-radius: 4px !important
+  padding: 0.5em 1.5em 0.5em 1.5em  !important
+  margin: .5em .5em 0 .5em
+
+.setBox_line
+  padding: .5em
+
+.hrLine
+  border-top: #444444 1px solid
+  border-bottom: none
+  border-left: none
+  border-right: none
+
+
+.cloShowPathSet 
+  position: absolute
+  top: 0 
+  left: -1.5em
+  +center 
+  +size(1.5em)
+  font-size: 1.5em
+  background-color: #f00
+  border-top-left-radius: .25em
+  border-bottom-left-radius: .25em
+  box-shadow: 4px 4px 4px $sys1
+  b
+    color: #fff
+    text-shadow: 2px 2px 2px $sys3
+
+
+
+
+

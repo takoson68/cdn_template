@@ -1,0 +1,43 @@
+.pathStyleSet.lsitCon(v-show="showPathSet") 
+  .cloShowPathSet(title="關閉折線樣式" @click="cloShowPathSet()")
+    b X
+  .setInfo
+    input.flex_3.inp_1( v-model="pathStyleSet.offset.color" :style="'background-color: '+pathStyleSet.offset.color+'55; border: 3px solid '+pathStyleSet.offset.color+';'")
+    input.flex_1( v-model="pathStyleSet.offset.strokeStyle" type="number" max="3" min="0" placeholder="線段種類")
+    button.btn(@click=" ") 樣式
+    input.flex_1( v-model="pathStyleSet.offset.lineBox" type="number" max="3" min="0" placeholder="線段種類")
+    button.btn(@click=" ") 線段
+  
+  ul.colorSetBox  
+    li( v-for="(color,i) in colorLinkBox" @click="setColor(color)" :key="i" :style="'background-color: '+color+'; border-color:'+(color==pathStyleSet.offset.color?color:'#ffffff')+';'") 
+  
+  hr 
+
+  .lineSetBox
+    p 手動設計線段折線 : 
+      label.useSetLine() 
+        input(type="radio" name="line" value="o_d" v-model="pathStyleSet.useLine")
+        | 原始線段
+      label.useSetLine() 
+        input(type="radio" name="line" value="n_d" v-model="pathStyleSet.useLine")
+        | 製作線段
+    hr 
+    div.setBox_line(v-if="pathStyleSet.useLine==='n_d'")
+      .setBox
+        b 選取起始點位置
+          .line-theme-square
+            label.lineTheme(v-for="ind in 4" :key="ind" :class="`theme-${ind}`")
+              input(type="radio" :value="ind" v-model="pathStyleSet.lineTheme.st" name="lineTheme")
+        |  ||  
+        b 選取結尾點位置
+          .line-theme-square
+            label.lineTheme(v-for="ind in 4" :key="ind" :class="`theme-${ind}`")
+              input(type="radio" :value="ind" v-model="pathStyleSet.lineTheme.ed" name="lineTheme2")
+        
+        //- p(style="text-align: right;") 
+          small (起始點有可能會是在畫面的右邊)
+      hr.hrLine
+      p.center
+        button.btn.addLinePoint( @click="addLinePoint()" ) 添加折點
+        button.btn.addLinePoint( @click="removeLinePoint()" ) 刪除折點
+        //- button.btn.useLinePoint( @click="useLinePoint()" ) 套用折線(存入資料)

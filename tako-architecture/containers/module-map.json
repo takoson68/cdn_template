@@ -1,0 +1,10 @@
+{
+  "urlUtils": "/design-pattern-lab/containers/utils/urlUtils.js",
+  "userService": "/design-pattern-lab/containers/services/userService.js",
+  "loggerService": "/design-pattern-lab/containers/services/loggerService.js",
+  "listService": "/design-pattern-lab/containers/services/listService.js",
+  "languageStore": "/design-pattern-lab/containers/store/languageStore.js",
+  "tokenStore": "/design-pattern-lab/containers/store/tokenStore.js",
+  "menuStore": "/design-pattern-lab/containers/store/menuStore.js",
+  "otherStore": "/design-pattern-lab/containers/store/otherStore.js"
+}

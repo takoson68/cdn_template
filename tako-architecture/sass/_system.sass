@@ -1,0 +1,249 @@
+body
+  overflow: hidden
+
+#app
+  padding: 2.6em 0em 
+  display: flex
+  flex-direction: column
+  .conBOx
+    display: flex
+    width: 100%
+    .conApp
+      width: 100%
+  
+  h2 
+    font-size: 1.25em
+    font-weight: bold
+  
+.layout-container
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  width: 100%
+  background-color: #eeeeee
+.layout-header
+
+.layout-footer
+  background: #333
+  color: white
+  padding: 1rem
+  text-align: center
+  width: 100%
+  position: fixed
+  bottom: 0
+  left: 0
+.layout-nav
+  background: #f8f8f8
+  padding: 0.5rem 1rem
+
+.layout-main
+  display: flex
+  flex-direction: row
+  height: calc(100vh - 5.5em)
+  overflow: auto
+  margin-bottom: -2px
+  .conApp
+    flex: 4
+    padding: 1em
+    padding-bottom: 1.15em
+    min-height: calc(100vh - 7.75em)
+  .listMenu
+    max-width: 180px
+    flex: 1
+    padding-right: 1em
+    padding-top: 1em
+    position: relative
+    ul 
+      position: sticky
+      top: 1em
+      li 
+        padding: .25em 0em 0em 1em
+        a
+          border-bottom: 1px solid #555
+          display: block
+          padding: .5em .25em
+    & + .conApp
+      border-left: 1px solid #333
+  .leftBox
+    max-width: 300px
+    flex: 1
+    padding: 1em
+    position: relative
+    .calendarTemp
+      position: sticky
+      top: 1em   
+      margin: 0 auto
+    & + .conApp
+      border-left: 1px solid #333
+
+.containerBox
+  margin: 0 auto 
+  max-width: 1200px
+  width: 100%
+  display: flex
+  height: max-content
+  background-color: #ffffff
+  p 
+    padding: .5em
+
+
+.index 
+  .conAppInit
+    input 
+      width: 300px
+
+.conAppInit
+  h2 
+    padding: .5em 0
+
+//-------------tableComponent-----------------
+ul.userBox
+  // margin: 1em
+  border: 1px solid $colorZ7
+  position: relative
+  li 
+    border-top: 1px solid $colorZ7
+    flex: 1
+    display: inline-flex
+    align-items: center
+    // justify-content: space-between
+    width: 100%
+    box-sizing: border-box
+    &:first-child
+      border-top: 0px solid red
+    &:nth-child(2n)
+      background-color: #f1f1f1
+    &:hover 
+      position: relative
+      div 
+        transform: scale(1.025)
+        background-color: #ffffff
+        border: 1px solid #cccccc
+        z-index: 1
+        box-shadow: 0 0 .5em #bbbbbb
+        border-radius: .5em
+    div 
+      display: flex
+      align-items: center
+      width: 100%
+      padding: 1em
+      transition: 0.35s
+      border: 1px solid #ffffff00
+
+    span 
+      flex: 2
+      display: inline-flex
+      & + span 
+        flex: 1
+        padding: .5em
+        justify-content: right
+        text-align: right
+        min-width: 3em
+        border-left: 1px solid #ccc
+    .nbr
+      font-size: .7em
+      +center 
+      +size(2.2em)
+      display: inline-flex
+      border-radius: 2em
+      background-color: #8bc34a
+      color: #ffffff
+      margin-right: 1em
+
+.showsetBtn
+  padding: .25em .5em   
+  background-color: red 
+  border-radius: .25em 
+  margin-left: 1em
+  color: #ffffff
+  cursor: pointer
+  display: inline-flex
+//---------------modalComponent----------------
+.modal-overlay
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: rgba(0, 0, 0, 0.5)
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 111
+  +fadein(.5s)
+  h2 
+    padding: .5em 0
+    font-size: 1.5em
+    border-bottom: 1px solid #cccccc
+    font-weight: bolder
+    text-align: center
+
+  form 
+    padding-top: 1em
+    div 
+      padding-right: 1em
+      margin-bottom: .5em
+      margin-bottom: .5em
+      display: flex
+      align-items: center
+      justify-content: space-between
+    label 
+      flex: 0 0 6em
+      text-align: right
+    input 
+      padding: .5em 0em .4em 1em
+      border-radius: 4px
+      border: 1px solid #cccccc
+      flex: 1
+
+  .modal
+    background: #fff
+    padding: 20px
+    border-radius: 1em
+    width: 560px
+    box-shadow: 0 2px 1em rgba(0, 0, 0, 0.5)
+    margin-top: -15%
+    position: relative
+    z-index: 1
+    border: 8px solid #cccccc
+    .actions
+      margin-top: 20px
+      text-align: right
+      border-top: 1px solid #cccccc
+      padding-top: 1em 
+      position: relative
+      justify-content: center !important
+      button
+        margin-left: 10px
+        padding: .35em 1.5em
+        border-radius: .25em
+        background-color: #4caf50
+        color: #ffffff
+        border: 1px solid #4caf50
+        & + button 
+          background-color: #03a9f4
+          border: 1px solid #03a9f4
+
+
+  .bgEvent
+    position: absolute
+    top: 0
+    left: 0
+    +size(100%)
+    z-index: 0
+
+  .clo 
+    display: block
+    +size(1.6em)
+    border-radius: 1em
+    background-color: red 
+    color: #ffffff
+    position: absolute
+    z-index: 2
+    +center 
+    top: .25em 
+    right: .25em
+    cursor: pointer 
+    border: 2px solid red
+
+

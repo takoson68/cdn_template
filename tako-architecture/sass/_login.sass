@@ -1,0 +1,76 @@
+button.login_btn
+  height: 2rem
+  font-size: .8em
+  display: inline-flex
+  width: 4rem
+  justify-content: center
+  align-items: center
+  border-radius: 4px
+  border: 1px solid #ccc
+
+
+.bgGary
+  position: fixed
+  top: 0
+  left: 0
+  +size(100%)
+  background-color: rgba(0,0,0,.7)
+  
+.login-form
+  position: fixed
+  display: flex
+  flex-direction: column
+  right: 2em
+  top: 0
+  background-color: #333
+  padding: 1em
+  border-radius: 4px
+  label
+    padding: .25em
+    display: inline-flex
+    justify-content: space-between
+    align-items: center
+    input 
+      height: 2em
+      padding-left: 1em
+      border-radius: 4px
+      border: 1px solid #ccc
+      margin-left: .5em
+  .btnBox
+    // width: calc( 100% - .25em )
+    display: flex
+    button 
+      border: 1px solid #ffffff
+      margin-top: .25em
+      height: 2em
+      border-radius: 4px
+      display: inline-flex 
+      flex: 1
+      justify-content: center
+      align-items: center
+      box-sizing: border-box
+      margin: 0 .25em
+.login-box 
+  max-width: 300px
+  margin: auto
+  padding: 1.5em
+  border: 1px solid #ccc
+  border-radius: 10px
+  box-shadow: 0 0 10px rgba(0,0,0,0.05)
+
+  h2 
+    text-align: center
+
+  form div 
+    margin-bottom: 1em
+
+  input 
+    width: 100%
+    padding: 0.5em
+
+  .error 
+    color: red
+    margin-top: 1em
+    text-align: center
+
+

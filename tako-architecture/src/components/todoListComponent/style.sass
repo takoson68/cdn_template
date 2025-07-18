@@ -1,0 +1,65 @@
+.todo-container
+  padding: 1rem
+  border: 1px solid #ccc
+  border-radius: 8px
+  max-width: 400px
+
+
+.todo-input
+  width: 100%
+  padding: 0.5rem
+  margin-bottom: 1rem
+
+
+ul.todo-list
+  padding: 0
+
+  li
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    padding: 0.5rem
+    border-bottom: 1px dashed #ddd
+    counter-increment: my-counter
+    position: relative
+    transition: 0.35s
+    &::before 
+      content: "("counter(my-counter) ")"
+    &:hover 
+      background-color: #eeeeee
+      padding-left: 1em
+    button 
+      position: absolute
+      right: .5em
+      z-index: 1
+      border-radius: 8px
+      background-color: #f16e11
+      border: solid 2px #ffc4c4
+      color: #ffffff
+      
+
+    span
+      cursor: pointer
+      padding: .5em
+      display: flex 
+      flex: 1
+      align-items: center
+
+      &.done
+        text-decoration: line-through
+        color: gray
+
+      small
+        position: absolute
+        right: 3rem
+        background-color: #28aa28
+        border: solid 2px #72da72
+        padding: .5em 1em
+        border-radius: 8px
+        color: #ffffff
+        font-size: .6em
+
+
+
+
+

@@ -1,21 +1,22 @@
 // @/pages/home/_pageComponents.js
 
-const modules = await Promise.all([
-  // import('@/components/menuComponent/index.js'),
-  import('@/components/todoListComponent/index.js'),
-  
-]);
+import menuComponent from '../../components/menuComponent/index.js'
+import todoListComponent from '../../components/todoListComponent/index.js'
 
 export default {
   install(app) {
-    modules.forEach(mod => {
-      const component = mod.default;
+    const modules = [
+      menuComponent,
+      todoListComponent
+    ]
+
+    modules.forEach(component => {
       if (component.name) {
-        app.component(component.name, component);
+        app.component(component.name, component)
       } else {
-        console.warn('Component missing name:', component);
+        console.warn('Component missing name:', component)
       }
-    });
+    })
   }
 }
- 
+

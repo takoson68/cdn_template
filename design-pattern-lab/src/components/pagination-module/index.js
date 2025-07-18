@@ -2,7 +2,7 @@
 import { createAutoInstaller } from '@/components/__componentUtils.js'
 
 export default await createAutoInstaller(import.meta.url, {
-  componentFile: 'pagination-component.js',
+  componentFile: 'pagination-module.js',
   exportName: 'PaginationComponent' //- 元件的name
 })
  
