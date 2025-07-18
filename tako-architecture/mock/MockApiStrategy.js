@@ -1,4 +1,4 @@
-import { mockRoutes } from '@/mock/routes/index.js'
+import { mockRoutes } from './routes/index.js'
 
 export class MockApiStrategy {
 request(url, options = {}) {

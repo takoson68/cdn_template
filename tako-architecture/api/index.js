@@ -1,7 +1,7 @@
 //- api/index.js
 import { ApiContainer } from './ApiContainer.js'
 import { RealApiStrategy } from './strategies/RealApiStrategy.js'
-import { MockApiStrategy } from '@/mock/MockApiStrategy.js'
+import { MockApiStrategy } from '../mock/MockApiStrategy.js'
 import { container } from '@/containers/index-dist.js'
 
 const useMock = !!window.Mock

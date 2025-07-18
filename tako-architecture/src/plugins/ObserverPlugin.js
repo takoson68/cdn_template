@@ -1,4 +1,4 @@
-import { api } from '@/api/index.js'
+import { api } from '@/api/index-dist.js'
 import { container } from '@/containers/index-dist.js' // 將 tokenStore 註冊在這裡
 const menuStore = container.resolve('menuStore');
 export default {

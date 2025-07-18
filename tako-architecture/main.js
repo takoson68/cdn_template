@@ -9,7 +9,7 @@
 // console.log(testContainer);
 import { container } from "@/containers/index-dist.js";
 
-import { api } from "@/api/index.js";
+import { api } from "@/api/index-dist.js";
 
 // 掛入共用工具
 const urlUtils = container.resolve("urlUtils");

@@ -3,7 +3,7 @@ import ObserverPlugin from './ObserverPlugin.js'
 import FactoryPatternPlugin from './FactoryPatternPlugin.js'
 import UserListPlugin from './UserListPlugin.js'
 import handlerPlugin from './handlerPlugin.js'
-import { api } from '@/api/index.js'
+import { api } from '@/api/index-dist.js'
 const conApp = {
   name: "conApp",
   components: { NotificationPlugin ,ObserverPlugin,FactoryPatternPlugin,UserListPlugin,handlerPlugin},

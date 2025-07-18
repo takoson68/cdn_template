@@ -27,6 +27,7 @@ const externalLibs = [
   '@Vue',
   '@/containers/index-dist.js',
   '@/api/index.js',
+  '@/api/index-dist.js',
   '../../vendors/vue/vue.esm-browser.prod.js',
   '../vendors/vue/vue.esm-browser.prod.js',
   '@/containers/directives/v-can.js',
@@ -39,6 +40,21 @@ const containerConfig = {
   input: path.resolve(__dirname, 'containers/index.js'),
   output: {
     file: path.resolve(__dirname, 'containers/index-dist.js'),
+    format: 'es',
+    sourcemap: false
+  },
+  plugins: [
+    alias({ entries: aliasEntries }),
+    resolve(),
+    commonjs()
+  ],
+  external: externalLibs
+}
+// ✅ 容器單一入口
+const apiConfig = {
+  input: path.resolve(__dirname, 'api/index.js'),
+  output: {
+    file: path.resolve(__dirname, 'api/index-dist.js'),
     format: 'es',
     sourcemap: false
   },
@@ -111,6 +127,7 @@ const componentsConfig = {
 // ✅ 匯出組合
 export default [
   containerConfig,
+  apiConfig,
   componentsConfig,
   // ...pageConfigs
 ]

@@ -1,7 +1,7 @@
 window.__IS_BUNDLED_COMPONENTS__ = true;
 import { defineComponent, ref, onMounted, nextTick } from '@Vue';
 import { container } from '@/containers/index-dist.js';
-import { api } from '@/api/index.js';
+import { api } from '@/api/index-dist.js';
 
 // @/components/loginComponent.js
 
