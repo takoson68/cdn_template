@@ -1,6 +1,6 @@
 const menu = [
   {
-    path: "/tako-architecture/home.html",
+    path: "/cdn_template/cdn_template/tako-architecture/home.html",
     component: "Home",
     meta: {
       title: "首頁",
@@ -10,7 +10,7 @@ const menu = [
     // children: [], // 無子路由
   },
   {
-    path: "/tako-architecture/about.html",
+    path: "/cdn_template/tako-architecture/about.html",
     component: "About",
     meta: {
       title: "關於我們",
@@ -19,7 +19,7 @@ const menu = [
     },
     children: [
       {
-        path: "/tako-architecture/about_team.html",
+        path: "/cdn_template/tako-architecture/about_team.html",
         component: "About",
         meta: {
           title: "團隊介紹",
@@ -28,7 +28,7 @@ const menu = [
         },
       },
       {
-        path: "/tako-architecture/about_mission.html",
+        path: "/cdn_template/tako-architecture/about_mission.html",
         component: "About",
         meta: {
           title: "我們的使命",
@@ -39,7 +39,7 @@ const menu = [
     ],
   },
   {
-    path: "/tako-architecture/contact.html",
+    path: "/cdn_template/tako-architecture/contact.html",
     component: "Contact",
     meta: {
       title: "聯絡我們",
@@ -49,7 +49,7 @@ const menu = [
     // children: [], // 無子路由
   },
   {
-    path: "/tako-architecture/calendar.html",
+    path: "/cdn_template/tako-architecture/calendar.html",
     component: "calendar",
     meta: {
       title: "萬年曆",
@@ -58,7 +58,7 @@ const menu = [
     },
   },
   {
-    path: "/tako-architecture/mtk2mad.html",
+    path: "/cdn_template/tako-architecture/mtk2mad.html",
     component: "mtk2mad",
     meta: {
       title: "攻擊路徑圖",
