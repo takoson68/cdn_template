@@ -59,10 +59,17 @@
 /* ==== modalComponent/style.css ==== */
 .modalComponent-template {
   padding: 1rem;
-  background: #f2f2f2;
+  background: #44e35c;
   border: 1px dashed #999;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
 }
-
 
 /* ==== mytestComponent/style.css ==== */
 .mytestComponent-template {
@@ -70,11 +77,9 @@
   background: #f2f2f2;
   border: 1px dashed #999;
 }
-
 .mytestComponent-template h2 {
-  color: red;
+  color: #b40660;
 }
-
 
 /* ==== pagination-module/style.css ==== */
 @charset "UTF-8";

@@ -3,7 +3,7 @@ import { container } from "@/containers/index-dist.js"; // 將 tokenStore 註冊
 const menuStore = container.resolve("menuStore");
 
 //--取得資料都使用api---
-import { api } from "@/api/index.js";
+import { api } from "@/api/index-dist.js";
 
 const listComponent = {
   name: "listComponent",

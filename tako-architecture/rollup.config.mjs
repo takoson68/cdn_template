@@ -1,4 +1,5 @@
 // rollup.config.mjs
+import fs from 'fs'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import alias from '@rollup/plugin-alias'
@@ -7,6 +8,12 @@ import { fileURLToPath } from 'url'
 import { readdirSync, statSync, rmSync } from 'fs'
 import banner2 from 'rollup-plugin-banner2'
 import { execSync } from 'child_process'
+import glob from 'fast-glob'
+import vue from 'rollup-plugin-vue'
+import postcss from 'rollup-plugin-postcss'
+import esbuild from 'rollup-plugin-esbuild'
+import sass from 'sass' // node-sass 或 dart-sass 都行，確保已安裝
+import fsExtra from 'fs-extra'
 // ⛳ __dirname 模擬
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -17,13 +24,13 @@ rmSync(distDir, { recursive: true, force: true }) // ⬅️ 強制遞迴刪除
 
 // ✅ 路徑 alias
 const aliasEntries = [
-  { find: '@', replacement: path.resolve(__dirname, 'src') },
-  { find: '@Vue', replacement: path.resolve(__dirname, 'vendors/vue/vue.esm-browser.prod.js') }
+  { find: '@Vue', replacement: path.resolve(__dirname, 'vendors/vue/vue.esm-browser.prod.js') },
+  { find: 'vue', replacement: path.resolve(__dirname, 'vendors/vue/vue.esm-browser.prod.js') },
+  { find: '@', replacement: path.resolve(__dirname, 'src') }
 ]
 
 // ✅ 外部排除模組
 const externalLibs = [
-  'vue',
   '@Vue',
   '@/containers/index-dist.js',
   '@/api/index.js',
@@ -92,14 +99,14 @@ const pageConfigs = pageDirs.map(pageName => ({
 function runCssBuildPlugin() {
   return {
     name: 'auto-run-style-bundler',
-    generateBundle() {
-      const scriptPath = path.resolve(__dirname, 'scripts/build-components-css.mjs')
-      try {
-        console.log('🚀 開始整併 components style.css ...')
-        execSync(`node ${scriptPath}`, { stdio: 'inherit' })
-        console.log('🎉 已完成 CSS 打包整合。')
-      } catch (err) {
-        console.error('❌ 自動打包 CSS 失敗：', err)
+    generateBundle(outputOptions, bundle) {
+      console.log('outputOptions:', outputOptions)
+      console.log('bundle files:', Object.keys(bundle))
+      for (const fileName of Object.keys(bundle)) {
+        if (fileName.endsWith('.css')) {
+          console.log('Found CSS:', fileName)
+          // 其他邏輯...
+        }
       }
     }
   }
@@ -123,12 +130,97 @@ const componentsConfig = {
   external: externalLibs
 }
 
+/**
+ * 自動建立 components/vue-entry.js
+ */
+function generateVueEntryPlugin() {
+  return {
+    name: 'generate-vue-entry',
+    buildStart() {
+      const vueEntryPath = path.resolve(__dirname, 'src/components/vue-entry.js')
+      const vueFiles = glob.sync(path.resolve(__dirname, 'src/components/*/*.vue'))
+
+      const lines = vueFiles.map(file => {
+        const name = path.basename(file, '.vue')
+        const relativePath = './' + path.relative(path.dirname(vueEntryPath), file).replace(/\\/g, '/')
+        return `export { default as ${name} } from '${relativePath}'`
+      })
+
+      fs.mkdirSync(path.dirname(vueEntryPath), { recursive: true })
+      fs.writeFileSync(vueEntryPath, lines.join('\n'))
+      console.log('✅ [rollup] vue-entry.js 已自動產生，共 ' + vueFiles.length + ' 個元件')
+    }
+  }
+}
+
+
+// 自訂 plugin 搬移 CSS（非同步，安全）
+function moveCssAfterBuild() {
+  return {
+    name: 'move-css-after-build',
+    writeBundle(outputOptions, bundle) {
+      const outputDir = outputOptions.dir || path.dirname(outputOptions.file)
+      for (const fileName of Object.keys(bundle)) {
+        if (fileName.endsWith('.css')) {
+          const cssFilePath = path.resolve(outputDir, fileName)
+          const targetDir = path.resolve(__dirname, 'css')
+          if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, { recursive: true })
+          }
+          const targetPath = path.join(targetDir, fileName)
+          fs.renameSync(cssFilePath, targetPath)
+          console.log(`✅ CSS 檔案搬移成功: ${targetPath}`)
+        }
+      }
+    }
+  }
+}
+
+
+// vueComponents 的 Rollup 設定
+const vueComponents = {
+  input: path.resolve(__dirname, 'src/components/vue-entry.js'),
+  output: {
+    file: path.resolve(__dirname, 'src/components/vueComponents.js'),
+    format: 'es',
+    sourcemap: false,
+    paths: {
+      vue: '@Vue'
+    },
+    // 絕對路徑的 file 用法，output.dir 與 file 不可同時設定
+    // 若你想要 output 到資料夾，可改用 output.dir 及 entryFileNames
+  },
+  plugins: [
+    generateVueEntryPlugin(),
+    vue({
+      preprocessStyles: true,
+      preprocessOptions: {
+        sass: {
+          implementation: sass,
+          indentedSyntax: true
+        },
+        stylus: {}
+      }
+    }),
+    postcss({
+      extract: 'vueComponents.css', // 僅用檔名，放在 output.file 同目錄
+      minimize: true,
+    }),
+    resolve(),
+    commonjs(),
+    esbuild(),
+    moveCssAfterBuild()
+  ],
+  external: ['vue']
+}
+
 
 // ✅ 匯出組合
 export default [
   containerConfig,
   apiConfig,
   componentsConfig,
+  vueComponents,
   // ...pageConfigs
 ]
 

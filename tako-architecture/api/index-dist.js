@@ -108,7 +108,7 @@ class RealApiStrategy {
 
 const menu = [
   {
-    path: "/cdn_template/tako-architecture/home.html",
+    path: "/cdn_template/cdn_template/tako-architecture/home.html",
     component: "Home",
     meta: {
       title: "首頁",
@@ -208,6 +208,15 @@ const menu = [
 // Mock 一個 API 回應
 const Random$1 = Mock.Random;
 
+// 自定義生成指定範圍內隨機日期的函式
+const generateRandomDate = (start, end) => {
+  const startTime = start.getTime();
+  const endTime = end.getTime();
+  const randomTime = Random$1.integer(startTime, endTime);
+  const date = new Date(randomTime);
+  return date.toISOString().split('T')[0]; // 返回格式化的日期（YYYY-MM-DD）
+};
+
 // 計算今天的前後三個月的日期範圍
 const getThreeMonthRangeFromToday = () => {
   const today = new Date();
@@ -300,7 +309,7 @@ const mockRoutes = {
       age: Random.integer(18, 60),
       star: Random.integer(0, 5),
       email: Random.email(),
-      date: mackSet.generateRandomDate(start, end), // 使用當日前後三個月的隨機日期
+      date: generateRandomDate(start, end), // 使用當日前後三個月的隨機日期
     })),
   }),
   // ...自由擴充更多 API

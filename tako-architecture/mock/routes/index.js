@@ -70,7 +70,7 @@ export const mockRoutes = {
       age: Random.integer(18, 60),
       star: Random.integer(0, 5),
       email: Random.email(),
-      date: mackSet.generateRandomDate(start, end), // 使用當日前後三個月的隨機日期
+      date: mockSet.generateRandomDate(start, end), // 使用當日前後三個月的隨機日期
     })),
   }),
   // ...自由擴充更多 API

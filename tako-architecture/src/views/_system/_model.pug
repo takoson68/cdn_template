@@ -11,6 +11,7 @@ html(xmlns="http://www.w3.org/1999/xhtml")
     
     link(rel="stylesheet", href="./css/main.css")
     link(rel="stylesheet" href="./css/components.css")
+    link(rel="stylesheet" href="./css/vueComponents.css")
     link( href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet")
     block link
     //- <!--[if IE]>
@@ -42,8 +43,8 @@ html(xmlns="http://www.w3.org/1999/xhtml")
     
 
   
-  -var root = '/cdn_template' //- 如果網址前面還有跟目錄
-  //- -var root = ''
+  //- -var root = '/cdn_template' //- 如果網址前面還有跟目錄
+  -var root = ''
   
   block scripts
   script(src=root+"/vendors/mock/mock.min.js") 

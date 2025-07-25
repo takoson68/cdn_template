@@ -2,8 +2,8 @@ import { container } from "@/containers/index-dist.js";
 
 const tempStore = container.resolve('tempStore')
 
-const ComponentTemplate = {
-  name: 'ComponentTemplate',
+const componentTemplate = {
+  name: 'componentTemplate',
   template: `
     <div class="component-template">
       <h2>{{myTest.name}}</h2>
@@ -14,7 +14,7 @@ const ComponentTemplate = {
   props: {},
   data() {
     return {
-      myTest: tempStore.get()||{}
+      myTest: tempStore.get().myTest||{}
     }
   },
   methods: {},
@@ -22,5 +22,5 @@ const ComponentTemplate = {
 
   },
 }
-export { ComponentTemplate }
-export default ComponentTemplate;
+export { componentTemplate }
+export default componentTemplate;

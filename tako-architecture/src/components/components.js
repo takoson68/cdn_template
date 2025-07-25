@@ -502,8 +502,8 @@ const calendarComponent = {
 
 const tempStore$1 = container.resolve('tempStore');
 
-const ComponentTemplate = {
-  name: 'ComponentTemplate',
+const componentTemplate = {
+  name: 'componentTemplate',
   template: `
     <div class="component-template">
       <h2>{{myTest.name}}</h2>
@@ -514,7 +514,7 @@ const ComponentTemplate = {
   props: {},
   data() {
     return {
-      myTest: tempStore$1.get()||{}
+      myTest: tempStore$1.get().myTest||{}
     }
   },
   methods: {},
@@ -722,20 +722,30 @@ tempStore.set('myTest.name', 'ＯＴＴＯ');
 
 const mytestComponent = {
   name: 'mytestComponent',
-  template: '#mytestComponent',
+  template: `
+  <div class="mytestComponent-template">
+    <h2>新增mytestComponent元件 ~~~~ </h2>
+    <p>這裡綁定 testStore 資料達到跨元件資料處理。</p>
+    <input v-model="myTest.name" placeholder="請輸入文字"/>
+    <button class="btn" @click="say">Submit</button>
+  </div>
+  `,
   props: {},
   data() {
     return {
-      myTest: tempStore.get()
+      myTest: tempStore.get().myTest
     }
   },
   methods: {
     say(){
       console.log(this.myTest.name);
+      tempStore.set('myTest.name', this.myTest.name);
     },
   },
   created() {
-    console.log(container);
+    let n = tempStore.get() || '無名稱';
+    console.log('mytestComponent created:', n);
+    console.log(tempStore.get().myTest);
   },
 };
 
@@ -877,7 +887,7 @@ var index = {
   install(app) {
     app.component('DefaultLayout', DefaultLayout);
     app.component('calendarComponent', calendarComponent);
-    app.component('componentTemplate', ComponentTemplate);
+    app.component('componentTemplate', componentTemplate);
     app.component('coverComponent', coverComponent);
     app.component('listComponent', listComponent);
     app.component('listUseStarTemp', listUseStarTemp);
@@ -891,4 +901,4 @@ var index = {
   }
 };
 
-export { DefaultLayout, calendarComponent, ComponentTemplate as componentTemplate, coverComponent, index as default, listComponent, listUseStarTemp, loginComponent, menuComponent, modalComponent, mytestComponent, ratingStarComponent, tableComponent, todoListComponent };
+export { DefaultLayout, calendarComponent, componentTemplate, coverComponent, index as default, listComponent, listUseStarTemp, loginComponent, menuComponent, modalComponent, mytestComponent, ratingStarComponent, tableComponent, todoListComponent };

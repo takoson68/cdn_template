@@ -7,7 +7,7 @@ const tokenStore = container.resolve("tokenStore");
 const langStore = container.resolve("languageStore");
 const permissionStore = container.resolve('permissionStore')
 //--取得資料都使用api---
-import { api } from "@/api/index.js";
+import { api } from "@/api/index-dist.js";
 
 // alert('QQQQ')
 const menuComponent = {
