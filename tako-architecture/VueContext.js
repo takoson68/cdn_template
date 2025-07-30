@@ -17,6 +17,8 @@ export const {
   onMounted,
   onBeforeUnmount,
   openBlock,
+  vModelText,
+  withDirectives,
   toDisplayString,
   createElementVNode,
   createElementBlock,

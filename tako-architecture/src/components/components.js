@@ -723,12 +723,12 @@ tempStore.set('myTest.name', 'ＯＴＴＯ');
 const mytestComponent = {
   name: 'mytestComponent',
   template: `
-  <div class="mytestComponent-template">
-    <h2>新增mytestComponent元件 ~~~~ </h2>
-    <p>這裡綁定 testStore 資料達到跨元件資料處理。</p>
-    <input v-model="myTest.name" placeholder="請輸入文字"/>
-    <button class="btn" @click="say">Submit</button>
-  </div>
+    <div class="mytestComponent-template">
+      <h2>新增mytestComponent元件 ~~~~ </h2>
+      <p>這裡綁定 testStore 資料達到跨元件資料處理。</p>
+      <input v-model="myTest.name" placeholder="請輸入文字"/>
+      <button class="btn" @click="say">Submit</button>
+    </div>
   `,
   props: {},
   data() {

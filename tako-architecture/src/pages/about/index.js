@@ -2,7 +2,7 @@
 
 import { createVueApp, defineComponent } from "@Vue";
 import Components from '@/components/components.js'  // 路徑依你實際調整
-import { newComponent } from '@/components/vueComponents.js'  // 路徑依你實際調整
+import vueComponents from '@/components/vueComponents.js'  // 路徑依你實際調整
 
 
 export const initPage = async ({ container, api }) => {
@@ -11,7 +11,6 @@ export const initPage = async ({ container, api }) => {
 
   const App = defineComponent({
     name: "aboutApp",
-    components: { newComponent }, //- 模板DefaultLayout 從最下面app.cue(allComponents)那邊注入
     template: `
       <DefaultLayout :testBox="testBox">
         <template #conApp>
@@ -61,6 +60,7 @@ export const initPage = async ({ container, api }) => {
   const app = createVueApp(App);
   // DefaultLayout 從這邊載入註冊
   app.use(Components)
+  app.use(vueComponents)
 
   app.mount("#app");
 

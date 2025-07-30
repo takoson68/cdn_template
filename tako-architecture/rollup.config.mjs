@@ -140,15 +140,41 @@ function generateVueEntryPlugin() {
       const vueEntryPath = path.resolve(__dirname, 'src/components/vue-entry.js')
       const vueFiles = glob.sync(path.resolve(__dirname, 'src/components/*/*.vue'))
 
-      const lines = vueFiles.map(file => {
-        const name = path.basename(file, '.vue')
-        const relativePath = './' + path.relative(path.dirname(vueEntryPath), file).replace(/\\/g, '/')
-        return `export { default as ${name} } from '${relativePath}'`
-      })
+      // ➤ 自動生成每一個元件的 import 與註冊名稱
+      const imports = []
+      const exports = []
+      const installLines = []
 
-      fs.mkdirSync(path.dirname(vueEntryPath), { recursive: true })
-      fs.writeFileSync(vueEntryPath, lines.join('\n'))
-      console.log('✅ [rollup] vue-entry.js 已自動產生，共 ' + vueFiles.length + ' 個元件')
+      for (const file of vueFiles) {
+        const fileName = path.basename(file, '.vue') // e.g. myComponent
+        const dirName = path.basename(path.dirname(file)) // e.g. myComponent/
+        const importName = dirName // 使用資料夾名稱作為變數名（較穩定）
+        const relativePath = path.relative(path.dirname(vueEntryPath), path.dirname(file)).replace(/\\/g, '/')
+
+        imports.push(`import ${importName} from './${relativePath}/${relativePath}.vue'`)
+        exports.push(importName)
+        installLines.push(`    app.component('${importName}', ${importName})`)
+      }
+
+      const fileContent = `// 🚀 此檔案由 rollup.config.mjs 自動產生
+${imports.join('\n')}
+
+export {
+  ${exports.join(',\n  ')}
+}
+
+export default {
+  install(app) {
+${installLines.join('\n')}
+  }
+}
+`
+
+      fs.mkdirSync(path.dirname(vueEntryPath), {
+        recursive: true
+      })
+      fs.writeFileSync(vueEntryPath, fileContent)
+      console.log(`✅ [rollup] vue-entry.js 已自動產生，共 ${vueFiles.length} 個元件`)
     }
   }
 }

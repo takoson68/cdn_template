@@ -1,7 +1,7 @@
 <!-- components/newComponent/newComponent.vue -->
 <template lang="pug">
 .component-template
-  h2 {{myTest.name}}
+  h2 {{myTest.name}} ~~~~~
   p 這是元件 {{ myTest.name }} 模板!!!!!
   p 資料是從mytestComponent模板使用store更新，達成跨元件同步資料
 
