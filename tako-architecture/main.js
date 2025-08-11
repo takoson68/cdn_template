@@ -10,6 +10,7 @@
 import { container } from "@/containers/index-dist.js";
 
 import { api } from "@/api/index-dist.js";
+alert("11111111")
 
 // 掛入共用工具
 const urlUtils = container.resolve("urlUtils");
@@ -27,7 +28,6 @@ const loadPageModule = async (page) => {
     console.error(`頁面模組 ${page} 載入失敗:`, err);
   }
 };
-alert("11111111")
 const init = async () => {
   if (pageName) {
     await loadPageModule(pageName);
