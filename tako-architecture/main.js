@@ -27,7 +27,7 @@ const loadPageModule = async (page) => {
     console.error(`頁面模組 ${page} 載入失敗:`, err);
   }
 };
-
+alert("11111111")
 const init = async () => {
   if (pageName) {
     await loadPageModule(pageName);
