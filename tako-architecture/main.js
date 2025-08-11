@@ -7,10 +7,11 @@
 
 // import {testContainer} from "@/containers/test_bb-dist.js";
 // console.log(testContainer);
+alert("11111111")
+
 import { container } from "@/containers/index-dist.js";
 
 import { api } from "@/api/index-dist.js";
-alert("11111111")
 
 // 掛入共用工具
 const urlUtils = container.resolve("urlUtils");
