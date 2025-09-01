@@ -186,7 +186,7 @@
     </script>
     <script type="text/x-template" id="listdata-component">
       <template>
-        <ul class="listTop">
+        <ul class="listTop"  v-cloak="v-cloak">
           <li v-for="(item, index) in mdData" :key="index">
             <div class="lsitCon" :class="item.nb">
               <p class="conValue"> <b class="opencreat" @click="opencreat(item,index,mdData)" title="新增" v-if="!item.end">✛</b>
