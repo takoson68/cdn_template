@@ -1,6 +1,6 @@
 //---------------------這邊加載的檔案都是全局共用，屬於核心程式------------------------
 // 加載 Vue
-import * as Vue from '/cdn_template/vendors/vue/vue.esm-browser.prod.js'
+import * as Vue from "/cdn_template/vendors/vue/vue.min.js";
 
 import { mdBoxApp } from "@/components/mtk2mad/mdBoxApp.js";
 
