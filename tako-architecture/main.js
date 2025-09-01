@@ -7,7 +7,6 @@
 
 // import {testContainer} from "@/containers/test_bb-dist.js";
 // console.log(testContainer);
-alert("11111111")
 
 import { container } from "@/containers/index-dist.js";
 
