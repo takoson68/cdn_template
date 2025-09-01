@@ -85,7 +85,7 @@
             </ul>
           </div>
         </div>
-        <div class="pathStyleSet lsitCon" v-show="showPathSet"> 
+        <div class="pathStyleSet lsitCon" v-show="showPathSet" v-cloak="v-cloak"> 
           <div class="cloShowPathSet" title="關閉折線樣式" @click="cloShowPathSet()"><b>X</b></div>
           <div class="setInfo">
             <input class="flex_3 inp_1" v-model="pathStyleSet.offset.color" :style="'background-color: '+pathStyleSet.offset.color+'55; border: 3px solid '+pathStyleSet.offset.color+';'"/>
