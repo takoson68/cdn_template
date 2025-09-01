@@ -23,7 +23,7 @@
         </h1>
         <button class="top_right btn_dlo center btn" onClick="screenshot();"><span class="material-icons">cloud_download</span><b>下載圖片</b></button>
       </section>
-      <section id="mtkBox">
+      <section id="mtkBox"  v-cloak="v-cloak">
         <div class="mdTopng">
           <h1 class="actTitle">新增攻擊路線 <small>( 攻擊起點必須按照出現順序填寫 ) <i>＊ 右邊圖片中箭頭線段及灰底方框皆可雙擊拖曳，且左方輸入資訊欄標註目標紅框  </i></small></h1><small>( 沒有出現 + 就代表此攻擊對象主機重複，此路線不再延展，請由重複之主機路線發展 )</small>
           <div class="dataListMad"> 
@@ -45,7 +45,7 @@
           </div>
           <div class="dragWidth" title="拖曳調整輸入框寬度"><span class="material-icons rr90">import_export</span></div>
         </div>
-        <div id="printable"> 
+        <div id="printable"  v-cloak="v-cloak"> 
           <div id="mtkInit">
             <ul class="box" id="boxLi">
               <li v-for="(aa,i) in treeBox" :key="i"> 
