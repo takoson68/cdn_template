@@ -114,7 +114,7 @@ const languageStore = {
     langCode = langCode || this.language;
 
     try {
-      const res = await fetch(`/tako-architecture/lang/lang-${langCode}.txt`);
+      const res = await fetch(`./tako-architecture/lang/lang-${langCode}.txt`);
       const text = await res.text();
       const parsed = this.parseLangText(text);
 
